@@ -7,53 +7,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; margin: 0; }
-        .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%); }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #1a1a1a; scroll-behavior: smooth; }
+        .ocean-dark { color: #0a2342; }
+        .bg-ocean { background-color: #0a2342; }
+        .hero-mask { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%); }
     </style>
 </head>
 <body class="antialiased">
 
-    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-black text-white">
         <div class="absolute inset-0 z-0">
-            <img src="images/nature.jpg" alt="Приморье" class="w-full h-full object-cover opacity-70">
-            <div class="absolute inset-0 hero-gradient"></div>
+            <img src="images/nature.jpg" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 hero-mask"></div>
         </div>
-
         <div class="relative z-10 text-center px-6 max-w-5xl">
-            <h1 class="text-3xl md:text-6xl font-light tracking-tight text-white mb-8 uppercase leading-tight">
-                Владивосток — путешествие к Тихому океану <br class="hidden md:block text-white"> с Ильей Чайкой
+            <h1 class="text-4xl md:text-7xl font-light tracking-tight mb-8 uppercase leading-tight">
+                Владивосток — путешествие <br class="hidden md:block"> к Тихому океану с Ильей Чайкой
             </h1>
-            <div class="mb-10">
-                <p class="text-lg md:text-2xl font-light text-gray-200 tracking-wide mb-4">
-                    Неделя у океана в заповедной зоне
-                </p>
-                <p class="text-xs md:text-base font-light text-gray-300 tracking-[0.2em] uppercase leading-relaxed">
-                    серфинг в Японском море, хайкинг по сопкам над океаном, <br class="hidden md:block text-white"> рыбалка и дальневосточная кухня
+            <div class="mb-12">
+                <p class="text-xl md:text-2xl font-light text-gray-100 tracking-wide mb-4">Неделя у океана в заповедной зоне</p>
+                <p class="text-xs md:text-sm font-light text-gray-300 tracking-[0.2em] uppercase max-w-2xl mx-auto leading-loose">
+                    серфинг в Японском море, хайкинг по сопкам над океаном, рыбалка и дальневосточная кухня
                 </p>
             </div>
-            <p class="text-[10px] md:text-xs font-medium tracking-[0.5em] text-gray-400 uppercase mb-12">
-                сентябрь 2026
-            </p>
-            <a href="https://t.me/ТВОЙ_НИК" class="inline-block border border-white/40 bg-white/10 backdrop-blur-md text-white px-10 py-4 text-[10px] tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-all duration-500">
-                Забронировать место
+            <p class="text-xs font-medium tracking-[0.6em] text-gray-400 uppercase mb-12 italic">сентябрь 2026</p>
+            <a href="#cta" class="inline-block bg-ocean text-white px-12 py-5 text-[10px] tracking-[0.4em] uppercase hover:opacity-90 transition-all shadow-xl">
+                Обсудить детали
             </a>
         </div>
     </section>
 
-    <section class="py-24 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div class="h-[500px] bg-gray-100 rounded-sm overflow-hidden shadow-sm">
-            <img src="images/nature.jpg" class="w-full h-full object-cover" alt="Природа Приморья">
+    <section class="py-32 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+        <div class="space-y-8">
+            <h2 class="text-3xl md:text-5xl font-light uppercase tracking-tighter ocean-dark">Илья Чайка</h2>
+            <div class="space-y-6 text-gray-600 font-light text-lg leading-relaxed">
+                <p>Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
+                <p>Участник чемпионатов мира по виндсерфингу и тестов олимпийского оборудования. Катается на спотах, доступных только серферам высокого уровня, и уже 15 лет обучает тому, чем занимается профессионально — поэтому его студенты прогрессируют быстрее.</p>
+                <p class="text-slate-900 font-medium">Эксперт Forbes, «Вокруг света» и Men Today.</p>
+            </div>
         </div>
-        <div>
-            <h2 class="text-2xl font-normal mb-8 tracking-tight">Дикий край</h2>
-            <p class="text-gray-600 mb-6 leading-relaxed font-light text-lg">Владивосток — это не только мосты. Это дикое побережье, заповедные бухты и Тихий океан. Мы будем жить в самом сердце заповедника, гулять на сапах там, где нет людей, и есть свежайшие морепродукты прямо из воды.</p>
-            <p class="text-gray-600 leading-relaxed font-light text-lg text-black">Красная рыба, гребешок, дикие крабы. Если повезет — встретим морских котиков прямо на спотах. Это поездка про настоящую природу и перезагрузку.</p>
+        <div class="relative">
+            <img src="images/ilya.jpg" class="w-full h-[600px] object-cover shadow-2xl" alt="Илья">
+            <img src="images/ilya2.jpg" class="absolute -bottom-12 -left-12 w-48 h-64 object-cover border-8 border-white hidden md:block shadow-lg" alt="Илья детали">
         </div>
     </section>
 
-    <section class="py-24 bg-zinc-50 border-y border-gray-100">
-        <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 class="text-2xl font-normal mb-8 tracking-tight">Честно про серфинг</h2>
-            <p class="text-gray-600 mb-12 leading-loose font-light text-lg">Мы едем за серфингом, но в Приморье всё решает океан. Если придет прогноз — будем кататься на лучших локальных спотах. Если волн не будет — скучать не придется. В программе рыбалка, катера, трекинг к маякам. Мы подстраиваемся под стихию, а не под график.</p>
-            <div class="h-80 bg-gray-200 rounded-sm overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
-                <img src="images/surf.jpg" class="w-full h-full object-cover" alt="Серфи
+    <section class="py-32 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-2xl md:text-4xl font-light mb-12 uppercase tracking-widest ocean-dark">Waterman лайфстайл</h2>
+            <p class="text-xl md:text-2xl text-gray-600 font-light leading-relaxed">
+                Пару дней в городе, все остальное время — на природе. Формат для тех, кто хочет меньше смотреть в телефон и больше на красоту окружающего мира.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mt-20">
+                <img src="images/city1.jpg" class="w-full h-

@@ -9,50 +9,45 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #1a1a1a; margin: 0; padding: 0; }
         
-        /* Кино-эффект для обложки */
-        .hero-overlay { 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%); 
+        /* Дымка для читаемости (Виньетка) */
+        .hero-mist { 
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1) 100%); 
         }
         
-        /* Цвет глубокого океана */
-        .ocean-brand { color: #0a2342; }
-        .bg-ocean-brand { background-color: #0a2342; }
-        
-        /* Плавность появления */
-        .fade-in { animation: fadeIn 1.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Цвет Морской Волны (Премиум) */
+        .sea-wave { color: #005B5C; }
+        .bg-sea-wave { background-color: #005B5C; }
+        .border-sea-wave { border-color: #005B5C; }
 
-        /* Читаемость на фото */
-        .text-shadow-premium {
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
+        .fade-in { animation: fadeIn 1.2s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="antialiased">
 
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="absolute inset-0 z-0">
-            <img src="images/nature.jpg" class="w-full h-full object-cover scale-105" alt="Background">
-            <div class="absolute inset-0 hero-overlay"></div>
+            <img src="images/nature.jpg" class="w-full h-full object-cover" alt="Background">
+            <div class="absolute inset-0 hero-mist"></div>
         </div>
         
         <div class="relative z-10 text-center px-6 max-w-6xl fade-in">
-            <h1 class="text-4xl md:text-8xl font-extralight tracking-[0.05em] text-white mb-10 uppercase leading-[1.1] text-shadow-premium">
-                Владивосток <br> <span class="font-normal opacity-90">— Путешествие —</span> <br> к Тихому океану
+            <h1 class="text-4xl md:text-8xl font-extralight tracking-tight text-white mb-10 uppercase leading-[1.05]">
+                Владивосток <br> <span class="font-normal opacity-95">путешествие</span> <br> к Тихому океану
             </h1>
             
             <div class="space-y-6 mb-12">
-                <p class="text-lg md:text-2xl font-light text-white tracking-widest uppercase opacity-80">
+                <p class="text-lg md:text-2xl font-light text-white tracking-[0.2em] uppercase opacity-90">
                     Неделя у океана в заповедной зоне
                 </p>
-                <p class="text-[10px] md:text-xs font-medium tracking-[0.4em] text-gray-300 uppercase leading-relaxed max-w-2xl mx-auto">
+                <p class="text-[10px] md:text-xs font-medium tracking-[0.4em] text-gray-200 uppercase max-w-2xl mx-auto opacity-80">
                     серфинг в Японском море, хайкинг по сопкам, рыбалка и дальневосточная кухня
                 </p>
             </div>
             
             <div class="flex flex-col items-center gap-8">
-                <p class="text-xs tracking-[0.6em] text-white/50 uppercase">сентябрь 2026</p>
-                <a href="#contact-section" class="inline-block border border-white/30 bg-white/10 backdrop-blur-md text-white px-14 py-5 text-[10px] tracking-[0.5em] uppercase hover:bg-white hover:text-black transition-all duration-700">
+                <p class="text-xs tracking-[0.6em] text-white/60 uppercase">сентябрь 2026</p>
+                <a href="#cta-block" class="inline-block bg-sea-wave text-white px-14 py-5 text-[10px] tracking-[0.5em] uppercase hover:opacity-90 transition-all duration-500 shadow-2xl">
                     Обсудить детали
                 </a>
             </div>
@@ -60,14 +55,14 @@
     </section>
 
     <section class="py-32 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-        <div class="relative group">
-            <img src="images/ilya.jpg" class="w-full h-[700px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000" alt="Илья Чайка">
+        <div class="relative">
+            <img src="images/ilya.jpg" class="w-full h-[700px] object-cover shadow-2xl transition-all duration-700" alt="Илья Чайка">
             <div class="absolute -bottom-10 -right-10 w-48 h-64 border-8 border-white shadow-xl hidden md:block">
                 <img src="images/ilya2.jpg" class="w-full h-full object-cover" alt="Детали">
             </div>
         </div>
         <div class="space-y-10">
-            <h2 class="text-4xl md:text-6xl font-light uppercase tracking-tighter ocean-brand">Илья Чайка</h2>
+            <h2 class="text-4xl md:text-6xl font-light uppercase tracking-tighter sea-wave">Илья Чайка</h2>
             <div class="space-y-8 text-gray-500 font-light text-xl leading-relaxed">
                 <p>Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
                 <p>Участник чемпионатов мира по виндсерфингу и тестов олимпийского оборудования. Катается на спотах, доступных только серферам высокого уровня, и уже 15 лет обучает тому, чем занимается профессионально — поэтому его студенты прогрессируют быстрее.</p>
@@ -78,21 +73,20 @@
 
     <section class="py-32 bg-zinc-50 border-y border-zinc-100">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-xs tracking-[0.5em] uppercase text-gray-400 mb-12">Философия</h2>
-            <h3 class="text-3xl md:text-5xl font-light mb-12 uppercase tracking-widest ocean-brand leading-tight">Waterman лайфстайл</h3>
+            <h2 class="text-3xl md:text-5xl font-light mb-12 uppercase tracking-widest sea-wave">Waterman лайфстайл</h2>
             <p class="text-xl md:text-2xl text-gray-500 font-light leading-relaxed mb-16">
                 Пару дней в городе, все остальное время — на природе. Формат для тех, кто хочет меньше смотреть в телефон и больше на красоту окружающего мира.
             </p>
             <div class="grid grid-cols-2 gap-6">
-                <img src="images/city1.jpg" class="w-full h-80 object-cover" alt="Город">
-                <img src="images/bridge.jpg" class="w-full h-80 object-cover" alt="Мост">
+                <img src="images/city1.jpg" class="w-full h-80 object-cover shadow-sm" alt="Город">
+                <img src="images/bridge.jpg" class="w-full h-80 object-cover shadow-sm" alt="Мост">
             </div>
         </div>
     </section>
 
     <section class="py-32 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
         <div class="space-y-12 order-2 md:order-1">
-            <h2 class="text-3xl md:text-5xl font-light uppercase tracking-widest ocean-brand">Экспедиция</h2>
+            <h2 class="text-3xl md:text-5xl font-light uppercase tracking-widest sea-wave">Экспедиция</h2>
             <p class="text-gray-500 text-xl font-light leading-relaxed">
                 Проведем эти дни как настоящие дальневосточники — серфинг в Японском море, рыбалка, прогулки на катере и исследование побережья.
             </p>
@@ -107,9 +101,9 @@
         </div>
     </section>
 
-    <section class="py-32 bg-zinc-900 text-white overflow-hidden">
+    <section class="py-32 bg-zinc-900 text-white">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-            <img src="images/primorye2.JPG" class="w-full h-[600px] object-cover opacity-60 shadow-2xl" alt="Приморье">
+            <img src="images/primorye2.JPG" class="w-full h-[600px] object-cover shadow-2xl" alt="Приморье">
             <div class="space-y-10">
                 <h2 class="text-3xl md:text-5xl font-light uppercase tracking-widest">Проживание</h2>
                 <p class="text-gray-400 text-xl font-light leading-relaxed italic">
@@ -124,43 +118,43 @@
 
     <section class="py-40 text-center px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-6xl font-extralight mb-16 uppercase tracking-[0.2em] ocean-brand">Почему сентябрь</h2>
+            <h2 class="text-3xl md:text-6xl font-extralight mb-16 uppercase tracking-[0.2em] sea-wave">Почему сентябрь</h2>
             <p class="text-xl md:text-3xl text-gray-400 font-light leading-relaxed mb-20">
                 Лучшее время для поездки во Владивосток. Теплая вода, свежий сухой воздух и отсутствие туристов, потому что это — четвертый месяц лета, о котором мало кто знает.
             </p>
             <div class="relative h-[500px] overflow-hidden">
-                <img src="images/people.jpg" class="w-full h-full object-cover grayscale opacity-80" alt="Люди">
+                <img src="images/people.jpg" class="w-full h-full object-cover opacity-90" alt="Люди">
             </div>
         </div>
     </section>
 
-    <section id="contact-section" class="py-32 max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-2xl md:text-4xl font-light mb-20 uppercase tracking-[0.3em] ocean-brand">Эта поездка для вас, если:</h2>
-        <div class="text-left space-y-8 mb-32 max-w-xl mx-auto text-gray-500 font-light text-xl">
-            <p class="flex gap-6 italic"><span>—</span> Вы хотите увидеть Приморский край таким, каким его видят местные, а не туристы</p>
-            <p class="flex gap-6 italic"><span>—</span> Вы хотите посерфить в Японском море</p>
-            <p class="flex gap-6 italic"><span>—</span> Вы цените профессионализм</p>
-            <p class="flex gap-6 italic"><span>—</span> Вы хотите увидеть удаленные красивые локации и умеете наслаждаться природой</p>
-            <p class="flex gap-6 italic"><span>—</span> Вы хотите перезагрузиться и вернуться домой отдохнувшим</p>
+    <section id="cta-block" class="py-32 max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-2xl md:text-4xl font-light mb-20 uppercase tracking-[0.3em] sea-wave">Эта поездка для вас, если:</h2>
+        <div class="text-left space-y-8 mb-32 max-w-xl mx-auto text-gray-500 font-light text-xl border-l border-zinc-100 pl-12">
+            <p class="italic">— Вы хотите увидеть Приморский край таким, каким его видят местные, а не туристы</p>
+            <p class="italic">— Вы хотите посерфить в Японском море</p>
+            <p class="italic">— Вы цените профессионализм</p>
+            <p class="italic">— Вы хотите увидеть удаленные красивые локации и умеете наслаждаться природой</p>
+            <p class="italic">— Вы хотите перезагрузиться и вернуться домой отдохнувшим</p>
         </div>
 
         <div class="py-24 border-t border-zinc-100">
-            <p class="text-[10px] uppercase tracking-[0.6em] text-gray-400 mb-8">Стоимость участия</p>
-            <h3 class="text-5xl md:text-8xl font-extralight mb-20 ocean-brand">от 130 000 ₽</h3>
+            <p class="text-[10px] uppercase tracking-[0.6em] text-gray-400 mb-8 font-medium">Стоимость участия</p>
+            <h3 class="text-5xl md:text-8xl font-extralight mb-20 sea-wave">от 130 000 ₽</h3>
             
             <div class="flex flex-col md:flex-row justify-center gap-8">
-                <a href="https://t.me/Chaika_Ilya" class="bg-ocean-brand text-white px-16 py-6 text-[10px] tracking-[0.5em] uppercase hover:bg-black transition-all shadow-2xl">
+                <a href="https://t.me/Chaika_Ilya" class="bg-sea-wave text-white px-16 py-6 text-[10px] tracking-[0.5em] uppercase hover:opacity-90 transition-all shadow-xl">
                     Обсудить с Ильей
                 </a>
-                <a href="https://t.me/Chaika_Ilya" class="border border-ocean-brand ocean-brand px-16 py-6 text-[10px] tracking-[0.5em] uppercase hover:bg-ocean-brand hover:text-white transition-all">
+                <a href="https://t.me/Chaika_Ilya" class="border border-sea-wave sea-wave px-16 py-6 text-[10px] tracking-[0.5em] uppercase hover:bg-sea-wave hover:text-white transition-all">
                     Забронировать
                 </a>
             </div>
-            <p class="mt-16 text-gray-400 text-[10px] tracking-[0.6em] uppercase">Группа 8 мест. Свободно 4.</p>
+            <p class="mt-16 text-gray-400 text-[10px] tracking-[0.6em] uppercase">Группа 6 мест. Свободно 4.</p>
         </div>
     </section>
 
-    <footer class="py-20 text-center opacity-20 border-t border-zinc-50">
+    <footer class="py-20 text-center opacity-30 border-t border-zinc-50">
         <span class="text-[10px] tracking-[1.2em] uppercase">43.1155° N, 131.8855° E — 2026</span>
     </footer>
 

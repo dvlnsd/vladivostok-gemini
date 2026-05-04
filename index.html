@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Владивосток | Илья Чайка</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
@@ -10,210 +10,154 @@
         :root {
             --bg: #0a0a0a;
             --text: #ffffff;
-            --accent: #00aaff; /* Твой фирменный голубой */
-            --gray: #666;
+            --accent: #5da9b6; /* Тот самый цвет со скрина */
+            --gray: #888;
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg); 
             color: var(--text); 
-            scroll-behavior: smooth; 
-            overflow-x: hidden; 
             font-weight: 200;
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* ГЕРО-ВИНИЕТКА */
-        .hero-vignette {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+        /* МЕНЮ */
+        nav {
+            position: fixed; top: 0; width: 100%; display: flex; justify-content: center;
+            padding: 30px 50px; z-index: 1000; background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: white; text-decoration: none; text-transform: uppercase; font-size: 11px; letter-spacing: 3px; opacity: 0.6; }
 
-        /* ТИПОГРАФИКА В СТИЛЕ САЙТА */
-        .title-large { 
-            font-weight: 100; 
-            letter-spacing: -0.05em; 
-            text-transform: uppercase;
-            line-height: 0.9;
+        /* HERO */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/nature.jpg') center/cover;
+            text-align: center;
         }
+        h1 { font-size: clamp(3rem, 10vw, 8rem); font-weight: 100; text-transform: uppercase; letter-spacing: -3px; line-height: 0.85; margin: 0; }
+        .hero-tag { font-size: 12px; letter-spacing: 8px; text-transform: uppercase; color: var(--accent); margin-top: 30px; }
+
+        /* ЭСТЕТИКА И ВОЗДУХ */
+        .container-air { max-width: 1400px; margin: 0 auto; padding: 160px 60px; }
+        .grid-air { display: grid; grid-template-columns: repeat(12, 1fr); gap: 60px; align-items: center; margin-bottom: 200px; }
         
-        h2 {
-            font-weight: 200;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* КНОПКИ (КОНТУРНЫЕ) */
-        .btn-outline {
-            display: inline-block;
-            padding: 20px 45px;
-            border: 1px solid var(--accent);
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 4px;
-            transition: 0.4s;
-            background: transparent;
-        }
-        .btn-outline:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
-        /* СКРОЛЛ-АЛЬБОМ */
-        .album-scroll {
-            display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px;
-        }
-        .album-scroll::-webkit-scrollbar { display: none; }
-        .album-scroll img { flex: 0 0 85%; scroll-snap-align: start; object-fit: cover; filter: grayscale(20%); }
-        @media (min-width: 768px) { .album-scroll img { flex: 0 0 40%; } }
-
-        .fade-in { animation: fadeIn 1.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .text-wrap { grid-column: span 5; }
+        .img-wrap { grid-column: span 7; position: relative; }
         
-        .section-spacer { padding: 160px 0; }
-        .label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gray); display: block; margin-bottom: 20px; }
+        img { width: 100%; height: auto; display: block; object-fit: cover; transition: 0.5s ease; }
+
+        /* КНОПКА (КОНТУР) */
+        .btn-exp {
+            display: inline-block; padding: 22px 55px; border: 1px solid var(--accent);
+            color: var(--accent); text-decoration: none; text-transform: uppercase;
+            font-size: 12px; letter-spacing: 4px; font-weight: 400; transition: 0.4s;
+        }
+        .btn-exp:hover { background: var(--accent); color: #000; }
+
+        .label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; display: block; }
+        
+        /* ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ */
+        .album { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 40px; }
+        .album::-webkit-scrollbar { display: none; }
+        .album img { flex: 0 0 45%; height: 600px; }
+
+        @media (max-width: 900px) {
+            .grid-air { display: flex; flex-direction: column; gap: 40px; }
+            .container-air { padding: 100px 20px; }
+            .album img { flex: 0 0 85%; height: 400px; }
+        }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- HERO -->
-    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="images/nature.jpg" class="w-full h-full object-cover" alt="Nature">
-            <div class="absolute inset-0 hero-vignette"></div>
+<nav>
+    <div class="nav-links">
+        <a href="index.html">Направления</a>
+        <a href="#">Обучение</a>
+        <a href="#">Серф-журнал</a>
+        <a href="#">Магазин</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Владивосток</h1>
+    <div class="hero-tag">Путешествие к Тихому океану</div>
+    <a href="#details" class="btn-exp" style="margin-top: 60px;">Обсудить детали</a>
+</section>
+
+<div class="container-air" id="details">
+    
+    <!-- БЛОК: ИЛЬЯ -->
+    <section class="grid-air">
+        <div class="text-wrap">
+            <span class="label">Waterman / Проводник</span>
+            <h2 class="text-6xl font-light mb-10 uppercase tracking-tight">Илья Чайка</h2>
+            <p class="text-gray-400 text-lg mb-6">Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
+            <p class="text-gray-400 text-lg mb-10">Катается на спотах, доступных только серферам высокого уровня, и уже 15 лет обучает тому, чем занимается профессионально.</p>
+            <p style="color: var(--accent);" class="text-sm uppercase tracking-widest">Эксперт Forbes, Вокруг света и Men Today.</p>
         </div>
-        
-        <div class="relative z-10 text-center px-6 max-w-6xl fade-in">
-            <span class="label">Сентябрь 2026</span>
-            <h1 class="title-large text-6xl md:text-[9vw] mb-12">
-                Владивосток <br> <span class="opacity-60">путешествие</span> <br> к Тихому океану
-            </h1>
-            
-            <div class="space-y-6 mb-16">
-                <p class="text-lg md:text-2xl font-light tracking-[0.2em] uppercase opacity-80">
-                    Неделя у океана в заповедной зоне
-                </p>
-                <div class="w-12 h-px bg-white/20 mx-auto"></div>
-                <p class="text-[10px] md:text-xs font-medium tracking-[0.4em] text-gray-400 uppercase max-w-3xl mx-auto leading-loose">
-                    серфинг в Японском море / хайкинг по сопкам / рыбалка / дальневосточная кухня
-                </p>
-            </div>
-            
-            <a href="https://t.me/Chaika_Ilya" class="btn-outline">
-                Обсудить детали
-            </a>
+        <div class="img-wrap">
+            <img src="images/ilya.jpg" style="height: 700px;">
+            <img src="images/ilya2.jpg" class="absolute -bottom-10 -left-10 w-48 h-64 border-[10px] border-[#0a0a0a] hidden md:block">
         </div>
     </section>
 
-    <!-- ИЛЬЯ -->
-    <section class="section-spacer container mx-auto px-10 grid grid-cols-12 gap-10 items-center">
-        <div class="col-span-12 md:col-span-6 space-y-10">
-            <span class="label">Проводник</span>
-            <h2 class="text-5xl md:text-7xl">Илья Чайка</h2>
-            <div class="space-y-6 text-gray-400 font-light text-lg leading-relaxed max-w-xl">
-                <p>Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
-                <p>Участник чемпионатов мира по виндсерфингу и тестов олимпийского оборудования. Катается на спотах, доступных только серферам высокого уровня, и уже 15 лет обучает тому, чем занимается профессионально — поэтому его студенты прогрессируют быстрее.</p>
-                <p class="text-white font-normal border-l border-white/20 pl-6">Эксперт Forbes, «Вокруг света» и Men Today.</p>
-            </div>
+    <!-- БЛОК: ФИЛОСОФИЯ -->
+    <section class="grid-air" style="align-items: flex-start;">
+        <div class="img-wrap" style="grid-column: span 6;">
+            <img src="images/city1.jpg" class="mb-8">
+            <img src="images/bridge.jpg">
         </div>
-        <div class="col-span-12 md:col-span-6 relative">
-            <img src="images/ilya.jpg" class="w-full h-[600px] object-cover filter grayscale" alt="Илья">
-            <img src="images/ilya2.jpg" class="absolute -bottom-10 -left-10 w-48 h-64 border border-white/10 shadow-2xl hidden md:block">
+        <div class="text-wrap" style="grid-column: 8 / span 5; padding-top: 100px;">
+            <span class="label">Lifestyle</span>
+            <h2 class="text-5xl font-light mb-8 uppercase">Чистый разум</h2>
+            <p class="text-gray-400 text-xl leading-relaxed italic">«Пару дней в городе, все остальное время — на природе. Формат для тех, кто хочет меньше смотреть в телефон и больше на красоту окружающего мира».</p>
         </div>
     </section>
 
-    <!-- ФИЛОСОФИЯ -->
-    <section class="section-spacer bg-[#111] border-y border-white/5">
-        <div class="max-w-5xl mx-auto px-10 text-center">
-            <span class="label">Философия</span>
-            <h2 class="text-4xl md:text-6xl mb-12">Waterman лайфстайл</h2>
-            <p class="text-xl md:text-2xl text-gray-400 font-light leading-relaxed mb-20">
-                Пару дней в городе, все остальное время — на природе. Формат для тех, кто хочет меньше смотреть в телефон и больше на красоту окружающего мира.
-            </p>
-            <div class="grid grid-cols-2 gap-4">
-                <img src="images/city1.jpg" class="w-full h-80 object-cover" alt="Город">
-                <img src="images/bridge.jpg" class="w-full h-80 object-cover" alt="Мост">
-            </div>
+    <!-- БЛОК: АЛЬБОМ -->
+    <section style="margin-bottom: 200px;">
+        <span class="label" style="text-align: center; margin-bottom: 60px;">Ритм трипа</span>
+        <div class="album">
+            <img src="images/surf.jpg">
+            <img src="images/lighthouse.jpg">
+            <img src="images/star.jpg">
+            <img src="images/primorye2.JPG">
         </div>
     </section>
 
-    <!-- РИТМ -->
-    <section class="section-spacer container mx-auto px-10">
-        <div class="text-center mb-20">
-            <span class="label">Ритм экспедиции</span>
-            <p class="text-gray-300 text-xl font-light leading-relaxed max-w-3xl mx-auto">
-                Проведем эти дни как настоящие дальневосточники — серфинг в Японском море, рыбалка, прогулки на катере и исследование побережья. Познакомимся с морскими котиками, исследуем живописные бухты на SUP, сходим на хайкинг и поужинаем легендарными приморскими гребешками.
-            </p>
+    <!-- БЛОК: ПРОЖИВАНИЕ -->
+    <section class="grid-air">
+        <div class="text-wrap">
+            <span class="label">Локация</span>
+            <h2 class="text-5xl font-light mb-8 uppercase">Заповедная зона</h2>
+            <p class="text-gray-400 text-lg mb-8">Будем жить у границы с Северной Кореей — в месте, скрытом от посторонних глаз. Дома из натурального бруса, панорамный вид, бассейн и баня.</p>
+            <p style="color: var(--accent);" class="text-xs uppercase tracking-[0.5em]">Confidential Location</p>
         </div>
-        
-        <div class="album-scroll">
-            <img src="images/surf.jpg" class="h-[500px]" alt="Surf">
-            <img src="images/lighthouse.jpg" class="h-[500px]" alt="Lighthouse">
-            <img src="images/star.jpg" class="h-[500px]" alt="Star">
-            <img src="images/primorye2.JPG" class="h-[500px]" alt="Nature">
+        <div class="img-wrap">
+            <img src="images/people.jpg" style="height: 600px;">
         </div>
     </section>
 
-    <!-- ПРОЖИВАНИЕ -->
-    <section class="section-spacer bg-[#0f0f0f] border-y border-white/5">
-        <div class="container mx-auto px-10 grid md:grid-cols-2 gap-20 items-center">
-            <div class="space-y-10">
-                <span class="label">Размещение</span>
-                <h2 class="text-4xl md:text-6xl">Проживание</h2>
-                <div class="space-y-6 text-gray-400 font-light text-lg">
-                    <p class="italic border-l border-accent/40 pl-6">«Будем жить в заповедной зоне у границы с Северной Кореей — в месте, скрытом от посторонних глаз».</p>
-                    <p>Размещение в домах из натурального бруса с панорамным видом на море, recovery area — бассейн, баня и холодная купель.</p>
-                </div>
-            </div>
-            <div class="relative h-[600px]">
-                <img src="images/primorye2.JPG" class="w-full h-full object-cover filter brightness-75" alt="Приморье">
-                <p class="absolute bottom-6 right-6 text-[8px] tracking-[0.5em] text-white/30 uppercase">Confidential Location</p>
-            </div>
+    <!-- БЛОК: CTA -->
+    <section style="text-align: center; padding-top: 100px; border-top: 1px solid #1a1a1a;">
+        <span class="label">Сентябрь 2026</span>
+        <h2 class="text-7xl font-thin mb-10 sea-wave" style="color: var(--accent);">от 130 000 ₽</h2>
+        <p class="text-gray-500 mb-20 uppercase tracking-[4px] text-xs">Группа 8 мест. Свободно 4.</p>
+        <div class="flex flex-col md:flex-row justify-center gap-8">
+            <a href="https://t.me/Chaika_Ilya" class="btn-exp">Обсудить с Ильей</a>
+            <a href="https://t.me/Chaika_Ilya" class="btn-exp" style="border-color: #333; color: white;">Забронировать</a>
         </div>
     </section>
 
-    <!-- ПОЧЕМУ СЕНТЯБРЬ -->
-    <section class="section-spacer text-center px-6">
-        <div class="max-w-4xl mx-auto">
-            <span class="label">Сезон</span>
-            <h2 class="text-4xl md:text-6xl mb-10">Почему сентябрь</h2>
-            <p class="text-lg md:text-2xl text-gray-400 font-light leading-relaxed mb-20">
-                Лучшее время для поездки во Владивосток. Теплая вода, свежий сухой воздух и отсутствие туристов, потому что это — четвертый месяц лета, о котором мало кто знает.
-            </p>
-            <img src="images/people.jpg" class="w-full h-[500px] object-cover grayscale opacity-50" alt="Люди">
-        </div>
-    </section>
+</div>
 
-    <!-- CTA BLOCK -->
-    <section id="cta-block" class="section-spacer container mx-auto px-10 text-center">
-        <h2 class="text-3xl md:text-5xl mb-20">Для кого этот трип</h2>
-        <div class="text-left space-y-6 mb-32 max-w-2xl mx-auto text-gray-400 font-light text-lg">
-            <p class="flex gap-4"><span>—</span> Вы хотите увидеть Приморский край таким, каким его видят местные</p>
-            <p class="flex gap-4"><span>—</span> Вы хотите посерфить в Японском море</p>
-            <p class="flex gap-4"><span>—</span> Вы цените профессионализм и удаленные красивые локации</p>
-            <p class="flex gap-4"><span>—</span> Вы хотите перезагрузиться и вернуться домой отдохнувшим</p>
-        </div>
-
-        <div class="py-32 border-t border-white/5 bg-[#0d0d0d]">
-            <span class="label">Participation fee</span>
-            <h3 class="text-6xl md:text-[8vw] font-thin mb-20 text-white leading-none">от 130 000 ₽</h3>
-            
-            <div class="flex flex-col md:flex-row justify-center gap-6">
-                <a href="https://t.me/Chaika_Ilya" class="btn-outline">
-                    Обсудить с Ильей
-                </a>
-                <a href="https://t.me/Chaika_Ilya" class="btn-outline" style="border-color: #333;">
-                    Забронировать
-                </a>
-            </div>
-            <p class="mt-16 text-gray-600 text-[10px] tracking-[0.5em] uppercase">Группа 8 мест. Свободно 4.</p>
-        </div>
-    </section>
-
-    <footer class="py-20 text-center opacity-20 border-t border-white/5">
-        <span class="text-[10px] tracking-[1.5em] uppercase">Pacific Ocean — Vladivostok — 2026</span>
-    </footer>
+<footer style="padding: 100px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 5px;">
+    PACIFIC OCEAN — VLADIVOSTOK — 2026
+</footer>
 
 </body>
 </html>

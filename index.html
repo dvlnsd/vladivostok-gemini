@@ -3,156 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Владивосток | Илья Чайка</title>
+    <title>Илья Чайка | Big Wave Athlete</title>
     <style>
-        :root { 
-            --accent: #ff5722; /* Safety Orange - цвет маяков и буев */
-            --bg: #0d0d0d; 
-            --steel: #888888;
-            --white: #f2f2f2; 
-        }
+        :root { --accent: #a0e9ff; --bg: #0a0a0a; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-        
-        /* TECHNICAL OVERLAY */
-        body::before {
-            content: "COORD: 43.1155° N, 131.8855° E";
-            position: fixed; top: 20px; left: 20px; font-size: 0.5rem; letter-spacing: 2px; opacity: 0.3; z-index: 1001;
-        }
+        a { color: inherit; text-decoration: none; }
 
-        /* NAVIGATION */
-        nav { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(13, 13, 13, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .nav-links a { color: var(--white); text-decoration: none; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5; transition: 0.2s; margin-right: 30px; }
+        /* NAVIGATION DESKTOP */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-links { display: flex; gap: 40px; position: absolute; left: 50%; transform: translateX(-50%); }
+        .nav-links a { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.5; transition: 0.1s; }
         .nav-links a:hover { opacity: 1; color: var(--accent); }
-        .btn-booking { background: var(--accent); color: #000; padding: 10px 25px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-booking:hover { background: #fff; transform: scale(1.05); }
+        .btn-contact { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 22px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.1s; font-weight: 500; }
+        .btn-contact:hover { background: var(--accent); color: #000; }
 
-        /* HERO SECTION */
+        /* SIDE PANEL */
+        .side-panel { position: fixed; top: 0; right: -100%; width: 450px; height: 100vh; background: rgba(13, 13, 13, 0.98); backdrop-filter: blur(15px); z-index: 2000; padding: 80px 50px; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); border-left: 1px solid rgba(255,255,255,0.05); }
+        .side-panel.active { right: 0; }
+        .side-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1999; display: none; }
+        .side-overlay.active { display: block; }
+        .panel-close { cursor: pointer; color: var(--accent); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 60px; display: block; }
+
+        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000; }
-        .hero-img { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) grayscale(0.5); }
-        .hero-content { z-index: 3; text-align: center; max-width: 800px; }
-        .hero-content h1 { font-size: clamp(2rem, 10vw, 5rem); text-transform: uppercase; letter-spacing: 15px; font-weight: 200; margin-bottom: 20px; }
-        .hero-content p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 5px; color: var(--steel); }
+        .hero-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: 1; filter: brightness(0.4); object-fit: cover; }
+        .hero-content { z-index: 3; text-align: center; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 6rem); text-transform: uppercase; letter-spacing: 25px; font-weight: 200; margin-bottom: 15px; }
+        .hero-content p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 10px; color: var(--accent); opacity: 0.9; }
 
-        /* CONTENT SECTION BLOCK */
-        section { padding: 120px 10%; border-bottom: 1px solid #1a1a1a; }
-        .section-tag { font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; display: block; }
-        h2 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 300; margin-bottom: 40px; }
-        
-        .grid-text { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-        .main-text { font-size: 1.1rem; font-weight: 300; color: #ccc; }
-        .sub-text { font-size: 0.85rem; color: var(--steel); }
+        /* MEDIA */
+        .media-section { background: #000; padding: 60px 10%; border-bottom: 1px solid #111; }
+        .media-grid { display: flex; justify-content: space-around; align-items: center; max-width: 1100px; margin: 0 auto; gap: 40px; }
+        .media-item { display: block; max-width: 140px; opacity: 0.4; transition: 0.1s; }
+        .media-item:hover { opacity: 1; filter: invert(85%) sepia(12%) saturate(1257%) hue-rotate(165deg) brightness(108%) contrast(101%); }
+        .media-item img { width: 100%; height: 40px; object-fit: contain; }
 
-        /* PHOTO GRID */
-        .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 60px 0; }
-        .photo-item { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #1a1a1a; border: 1px solid #222; }
-        .photo-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
-        .photo-item:hover img { filter: grayscale(0); transform: scale(1.05); }
+        /* SURF TRIPS - REVEAL EFFECT */
+        .schedule-section { padding: 100px 8%; background: #0a0a0a; position: relative; }
+        .sch-row { position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; padding: 40px 30px; transition: 0.1s; overflow: hidden; z-index: 1; }
+        .row-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-position: center; opacity: 0; transition: 0.3s ease; filter: brightness(0.35); pointer-events: none; }
+        .sch-row:hover .row-bg { opacity: 1; }
+        .sch-row:hover { border-bottom-color: var(--accent); }
+        .col-dir { width: 30%; } .col-date { width: 20%; } .col-lvl { width: 20%; } .col-price { width: 15%; text-align: right; } .col-btn { width: 15%; text-align: right; }
+        .trip-title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 300; transition: 0.2s; }
+        .sch-row:hover .trip-title { color: var(--accent); }
+        .trip-sub { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }
+        .btn-plan { border: 1px solid rgba(255,255,255,0.2); padding: 10px 20px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.2s; display: inline-block; }
 
-        /* SPOTS LIST */
-        .spot-row { display: flex; justify-content: space-between; align-items: baseline; padding: 25px 0; border-bottom: 1px solid #1a1a1a; transition: 0.3s; }
-        .spot-row:hover { padding-left: 20px; color: var(--accent); }
-        .spot-name { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
-        .spot-desc { font-size: 0.7rem; color: var(--steel); text-transform: uppercase; }
+        /* GRIDS */
+        .grid-services { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto; }
+        .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .journal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .img-box { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #111; border: 1px solid #1a1a1a; margin-bottom: 20px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(0.6); transition: 0.1s; }
+        .card:hover img { filter: grayscale(0) brightness(1); }
 
-        /* FOOTER */
-        footer { padding: 100px 10%; text-align: center; background: #050505; }
-        .footer-cta { margin-bottom: 60px; }
-        .footer-cta h2 { font-size: 3rem; margin-bottom: 30px; }
+        /* MOBILE MENU & UI */
+        .burger { display: none; position: fixed; top: 20px; left: 8%; z-index: 1010; cursor: pointer; flex-direction: column; gap: 6px; }
+        .burger span { width: 25px; height: 1px; background: #fff; }
+        .mobile-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px); z-index: 1009; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        .mobile-menu.active { left: 0; }
+        .mobile-menu a { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 5px; font-weight: 200; }
+        .menu-back { position: absolute; top: 20px; left: 8%; color: var(--accent); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+        .sticky-booking { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1a1a1a; color: var(--accent); text-align: center; padding: 22px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; z-index: 1005; border-top: 1px solid rgba(160, 233, 255, 0.1); }
 
         @media (max-width: 900px) {
-            .grid-text, .photo-strip { grid-template-columns: 1fr; gap: 40px; }
-            nav .nav-links { display: none; }
-            .hero-content h1 { letter-spacing: 5px; }
-            section { padding: 80px 5%; }
+            nav { display: none; } .burger { display: flex; } .sticky-booking { display: block; }
+            .sch-row { flex-direction: column; align-items: center; padding: 40px 20px; text-align: center; background: #0d0d0d; margin-bottom: 15px; }
+            .row-bg { position: relative; opacity: 1; height: 200px; width: calc(100% + 40px); margin: -40px 0 20px 0; }
+            .col-dir, .col-date, .col-lvl, .col-price, .col-btn { width: 100%; text-align: center; margin-bottom: 10px; }
+            .grid-services { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; }
+            .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 10px; }
+            .journal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0 5px; }
+            .card h3 { font-size: 0.65rem !important; } .card p { display: none; }
+            .side-panel { width: 100%; }
+            footer { padding-bottom: 120px !important; }
         }
     </style>
 </head>
 <body>
 
+    <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-back" onclick="toggleMenu()">← НАЗАД</div>
+        <a href="surf-trips.html">направления</a>
+        <a href="surf-coaching-bali.html">обучение</a>
+        <a href="surf-journal.html">серф-журнал</a>
+        <a href="surf-shop.html">магазин</a>
+    </div>
+
+    <a href="https://t.me/Chaika_Ilya" target="_blank" class="sticky-booking">ЗАБРОНИРОВАТЬ СЕРФ-ТРИП</a>
+
     <nav>
+        <div style="width: 150px;"></div>
         <div class="nav-links">
-            <a href="index.html">на главную</a>
-            <a href="#about">о трипе</a>
-            <a href="#spots">локации</a>
+            <a href="surf-trips.html">направления</a>
+            <a href="surf-coaching-bali.html">обучение</a>
+            <a href="surf-journal.html">серф-журнал</a>
+            <a href="surf-shop.html">магазин</a>
         </div>
-        <button class="btn-booking" onclick="window.open('https://t.me/Chaika_Ilya')">Забронировать</button>
+        <button class="btn-contact" onclick="toggleSidePanel()">СВЯЗАТЬСЯ</button>
     </nav>
 
+    <div class="side-overlay" id="sideOverlay" onclick="toggleSidePanel()"></div>
+    <div class="side-panel" id="sidePanel">
+        <span onclick="toggleSidePanel()" class="panel-close">[ закрыть ]</span>
+        <h2 style="font-weight:200; letter-spacing:5px; text-transform:uppercase; font-size:1.8rem; color:#fff;">Написать<br>сообщение</h2>
+        <p style="font-size:0.6rem; opacity:0.4; text-transform:uppercase; letter-spacing:2px; margin: 15px 0 50px;">здесь вы можете задать вопросы по серф трипам, обучению и коллаборациям</p>
+        <form action="mailto:chaikailya@gmail.com" method="post" enctype="text/plain" style="display:flex; flex-direction:column; gap:20px;">
+            <input type="text" placeholder="ИМЯ" required style="width:100%; background:none; border:none; border-bottom:1px solid rgba(255,255,255,0.1); color:#fff; padding:15px 0; outline:none; font-size:0.75rem;">
+            <input type="email" placeholder="EMAIL" required style="width:100%; background:none; border:none; border-bottom:1px solid rgba(255,255,255,0.1); color:#fff; padding:15px 0; outline:none; font-size:0.75rem;">
+            <textarea placeholder="ВАШ ЗАПРОС..." rows="4" style="width:100%; background:none; border:none; border-bottom:1px solid rgba(255,255,255,0.1); color:#fff; padding:15px 0; outline:none; font-size:0.75rem; resize:none;"></textarea>
+            <button type="submit" style="width:100%; background:var(--accent); color:#000; border:none; padding:22px; cursor:pointer; text-transform:uppercase; letter-spacing:4px; font-weight:700;">ОТПРАВИТЬ ЗАПРОС</button>
+        </form>
+    </div>
+
     <header class="hero">
-        <img src="images/vladivostokwave.jpg" class="hero-img">
+        <video autoplay muted loop playsinline class="hero-video"><source src="images/video1.mp4" type="video/mp4"></video>
         <div class="hero-content">
-            <span class="section-tag">Сентябрь 2026</span>
-            <h1>VLADIVOSTOK</h1>
-            <p>Экспедиция на край континента</p>
+            <h1>ILYA CHAIKA</h1>
+            <p>BIG WAVE ATHLETE / SURF TRIPS</p>
         </div>
     </header>
 
-    <section id="about">
-        <span class="section-tag">01. Концепция</span>
-        <h2>Океан и город</h2>
-        <div class="grid-text">
-            <div class="main-text">
-                Владивосток — это российский Исланд. Здесь серфинг не про чилл, а про преодоление и масштаб. Мы будем ловить волны, которые приходят из открытого океана и разбиваются о суровые скалы Приморья.
-            </div>
-            <div class="sub-text">
-                Сентябрь — пик сезона. Вода еще хранит летнее тепло, а приходящие тайфуны формируют мощные и правильные волны. Это время контрастов: туманные рассветы в бухтах и неоновые огни порта.
-            </div>
-        </div>
-        <div class="photo-strip">
-            <div class="photo-item"><img src="images/vladivostokwave.jpg"></div>
-            <div class="photo-item"><img src="images/ilyastungun.jpg"></div>
-            <div class="photo-item"><img src="images/ilyaulu.jpg"></div>
+    <section class="media-section">
+        <div class="media-grid">
+            <a href="https://www.forbes.ru/forbeslife/543538-serfing-novyj-netvorking-kak-sport-korolej-stal-popularnym-u-predprinimatelej" target="_blank" class="media-item"><img src="images/pressforbes.svg"></a>
+            <a href="https://www.championat.com/lifestyle/article-6084332-chto-takoe-sapsyorfing-otvechaet-professionalnyj-sportsmen.html" target="_blank" class="media-item"><img src="images/presschampionat.svg"></a>
+            <a href="https://www.vokrugsveta.ru/history/vysotoi-s-devyatietazhku-6-samykh-bolshikh-voln-v-mire-na-kotorykh-katayutsya-serfery-id6355397/" target="_blank" class="media-item"><img src="images/pressvokrugsveta.svg"></a>
+            <a href="https://www.mentoday.ru/entertainment/sport/kak-stat-serferom-esli-ty-iz-rossii/" target="_blank" class="media-item"><img src="images/pressmentoday.svg"></a>
         </div>
     </section>
 
-    <section id="spots">
-        <span class="section-tag">02. Программа</span>
-        <h2>Маршрут сессий</h2>
+    <section class="schedule-section">
+        <h2 style="text-align:center; text-transform:uppercase; letter-spacing:15px; margin-bottom:80px; font-weight:200;">СЕРФ-ТРИПЫ <span style="color:var(--accent);">2026</span></h2>
         <div class="schedule-container">
-            <div class="spot-row">
-                <span class="spot-name">Бухта Ахлестышева</span>
-                <span class="spot-desc">Мекка приморского серфинга / пологий лонгборд-вейв</span>
-            </div>
-            <div class="spot-row">
-                <span class="spot-name">Мыс Тобизина</span>
-                <span class="spot-desc">Дикие скалы / мощный штормовой серфинг</span>
-            </div>
-            <div class="spot-row">
-                <span class="spot-name">Остров Рейнеке</span>
-                <span class="spot-desc">Экспедиция на катере / чистая вода и пустые споты</span>
-            </div>
-            <div class="spot-row">
-                <span class="spot-name">Маяк Токаревского</span>
-                <span class="spot-desc">Урбан-сессия с видом на мосты</span>
-            </div>
+            <a href="g-land-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/ilyastungun.jpg');"></div><div class="col-dir"><span class="trip-title">G-LAND (ЯВА)</span></div><div class="col-date"><span class="trip-sub">МАЙ</span></div><div class="col-lvl"><span class="trip-sub">ADVANCED</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="mentawai-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/mentawaiilya.jpg');"></div><div class="col-dir"><span class="trip-title">МЕНТАВАИ</span></div><div class="col-date"><span class="trip-sub">ИЮНЬ</span></div><div class="col-lvl"><span class="trip-sub">ADVANCED</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="sumbawa-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/sup1.jpg');"></div><div class="col-dir"><span class="trip-title">СУМБАВА</span></div><div class="col-date"><span class="trip-sub">ИЮЛЬ</span></div><div class="col-lvl"><span class="trip-sub">INTERMEDIATE</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="sumba-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/ilyaulusup.jpg');"></div><div class="col-dir"><span class="trip-title">СУМБА</span></div><div class="col-date"><span class="trip-sub">АВГУСТ</span></div><div class="col-lvl"><span class="trip-sub">ALL LEVELS</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="vladivostok-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/vladivostokwave.jpg');"></div><div class="col-dir"><span class="trip-title">ВЛАДИВОСТОК</span></div><div class="col-date"><span class="trip-sub">СЕНТЯБРЬ</span></div><div class="col-lvl"><span class="trip-sub">ALL LEVELS</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="mexico-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/ilyamain.jpg');"></div><div class="col-dir"><span class="trip-title">МЕКСИКА</span></div><div class="col-date"><span class="trip-sub">ОКТЯБРЬ</span></div><div class="col-lvl"><span class="trip-sub">BIG WAVE</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
+            <a href="south-africa-surf-trip.html" class="sch-row"><div class="row-bg" style="background-image: url('images/ilyaulu.jpg');"></div><div class="col-dir"><span class="trip-title">ЮАР</span></div><div class="col-date"><span class="trip-sub">НОЯБРЬ</span></div><div class="col-lvl"><span class="trip-sub">ADVANCED</span></div><div class="col-price">3000 USD</div><div class="col-btn"><span class="btn-plan">ПЛАН ТРИПА</span></div></a>
         </div>
     </section>
 
-    <section>
-        <span class="section-tag">03. Комфорт</span>
-        <h2>Сервис в диких условиях</h2>
-        <div class="grid-text">
-            <div class="main-text">
-                Мы берем на себя всю логистику и экипировку. Подготовленные внедорожники для заезда в закрытые бухты и лучшие гидрокостюмы для вашего тепла.
-            </div>
-            <div class="sub-text">
-                После каждой сессии — горячий чай из дикоросов на берегу. Вечером — гастрономический опыт: свежие гребешки, краб и устрицы прямо из моря.
-            </div>
-        </div>
+    <section style="background: #080808; padding: 100px 10%;">
+        <div class="grid-services"><a href="surf-coaching-bali.html" class="card"><div class="img-box"><img src="images/ilyaulu.jpg"></div><h3 style="text-align:center; font-weight:300; letter-spacing:4px; font-size:1.1rem;">PRIVATE COACHING</h3></a><a href="surf-guiding-bali.html" class="card"><div class="img-box"><img src="images/ilyafoil.jpg"></div><h3 style="text-align:center; font-weight:300; letter-spacing:4px; font-size:1.1rem;">SURF GUIDING</h3></a></div>
     </section>
 
-    <footer>
-        <div class="footer-cta">
-            <span class="section-tag">Final call</span>
-            <h2>Начни с края света</h2>
-            <button class="btn-booking" style="padding: 20px 60px; font-size: 0.8rem;" onclick="window.open('https://t.me/Chaika_Ilya')">Обсудить трип в Telegram</button>
+    <section style="padding: 100px 10%; background:#000;"><h2 style="text-align:center; text-transform:uppercase; letter-spacing:10px; margin-bottom:60px; font-weight:200;">МАГАЗИН</h2><div class="shop-grid"><div class="card"><div class="img-box"><img src="images/tshirt.jpg"></div><h4 style="text-align:center; font-size:0.6rem; letter-spacing:2px;">TEE — 4500 ₽</h4></div><div class="card"><div class="img-box"><img src="images/lycra.jpg"></div><h4 style="text-align:center; font-size:0.6rem; letter-spacing:2px;">LYCRA — 6200 ₽</h4></div><div class="card"><div class="img-box"><img src="images/glo.jpg"></div><h4 style="text-align:center; font-size:0.6rem; letter-spacing:2px;">BOARD — 120 000 ₽</h4></div></div></section>
+
+    <section style="padding: 100px 10%; background:#050505;"><h2 style="text-align:center; text-transform:uppercase; letter-spacing:10px; margin-bottom:60px; font-weight:200;">СЕРФ-ЖУРНАЛ</h2><div class="journal-grid"><a href="article-indonesia.html" class="card"><div class="img-box"><img src="images/ilyastungun.jpg"></div><h4 style="text-align:center; font-size:0.5rem;">ИНДОНЕЗИЯ</h4></a><a href="article-training.html" class="card"><div class="img-box"><img src="images/ilyafoil.jpg"></div><h4 style="text-align:center; font-size:0.5rem;">ПОДГОТОВКА</h4></a><a href="article-gear.html" class="card"><div class="img-box"><img src="images/ilyamain.jpg"></div><h4 style="text-align:center; font-size:0.5rem;">ЭКИПИРОВКА</h4></a><a href="article-ocean.html" class="card"><div class="img-box"><img src="images/ilyaulu.jpg"></div><h4 style="text-align:center; font-size:0.5rem;">ФИЛОСОФИЯ</h4></a></div></section>
+
+    <footer style="padding: 80px 10% 120px; text-align: center; border-top: 1px solid #111;">
+        <h2 style="font-size:1.6rem; letter-spacing:12px; font-weight:200; text-transform:uppercase; margin-bottom:10px;">ИЛЬЯ ЧАЙКА</h2>
+        <p style="font-size:0.65rem; letter-spacing:4px; opacity:0.4; text-transform:uppercase; margin-bottom:40px;">серфер | серф-коуч | организатор серф-трипов</p>
+        <div style="display:flex; justify-content:center; gap:40px; margin:40px 0;">
+            <a href="https://t.me/Chaika_Ilya" style="color:var(--accent); font-size:0.75rem; letter-spacing:2px;">TELEGRAM</a>
+            <a href="https://instagram.com/chaika_ilya" target="_blank" style="color:var(--accent); font-size:0.75rem; letter-spacing:2px;">INSTAGRAM</a>
+            <a href="https://youtube.com/@chaika_ilya" target="_blank" style="color:var(--accent); font-size:0.75rem; letter-spacing:2px;">YOUTUBE</a>
         </div>
-        <p style="font-size: 0.5rem; color: var(--steel); letter-spacing: 2px; text-transform: uppercase; margin-top: 50px;">
-            Ilya Chaika / Vladivostok Expedition / 2026
-        </p>
+        <p style="font-size:0.45rem; opacity:0.2; text-transform:uppercase; letter-spacing:1px; max-width:600px; margin:0 auto; line-height:2;">* Instagram принадлежит компании Meta, запрещенной в РФ.</p>
     </footer>
 
+    <script>
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        function toggleSidePanel() { document.getElementById('sidePanel').classList.toggle('active'); document.getElementById('sideOverlay').classList.toggle('active'); }
+    </script>
 </body>
 </html>

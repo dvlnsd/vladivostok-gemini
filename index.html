@@ -15,12 +15,12 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--ocean-dark); color: var(--foam); scroll-behavior: smooth; overflow-x: hidden; }
         .hero-overlay { background: linear-gradient(to bottom, rgba(2, 8, 23, 0.4) 0%, rgba(2, 8, 23, 0.9) 100%); }
-        .btn-foam { background-color: var(--foam); color: var(--ocean-dark); transition: all 0.3s ease; font-weight: 700; }
+        .btn-foam { background-color: var(--foam); color: var(--ocean-dark); transition: all 0.3s ease; font-weight: 700; border-radius: 2px; }
         .btn-foam:hover { background-color: var(--accent); transform: translateY(-2px); }
         .album-scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 2rem; }
         .album-card { flex: 0 0 85%; scroll-snap-align: start; }
         @media (min-width: 768px) { .album-card { flex: 0 0 40%; } }
-        .title-hero { font-weight: 200; letter-spacing: 0.15em; font-size: clamp(2rem, 6vw, 5rem); line-height: 1.1; text-transform: uppercase; }
+        .title-hero { font-weight: 200; letter-spacing: 0.15em; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.1; text-transform: uppercase; }
         .title-section { font-weight: 200; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
     </style>
 </head>
@@ -28,13 +28,13 @@
 
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="images/nature.JPG" class="w-full h-full object-cover scale-105" alt="Nature">
+            <img src="images/nature.jpg" class="w-full h-full object-cover scale-105" alt="">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-6xl">
             <h1 class="title-hero mb-8">ПУТЕШЕСТВИЕ ВО ВЛАДИВОСТОК <br> <span class="font-normal text-[var(--accent)]">С ИЛЬЕЙ ЧАЙКОЙ</span></h1>
-            <p class="text-lg md:text-2xl font-light tracking-widest opacity-90 mb-12">серфинг в тихом океане и невероятная природа дальнего востока</p>
-            <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-foam px-12 py-5 text-[10px] tracking-[0.4em] uppercase shadow-2xl">Подать заявку</a>
+            <p class="text-lg md:text-2xl font-light tracking-widest opacity-90 mb-12 uppercase">серфинг в тихом океане и невероятная природа дальнего востока</p>
+            <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-foam px-16 py-6 text-[11px] tracking-[0.4em] uppercase shadow-2xl">Подать заявку</a>
         </div>
     </section>
 
@@ -43,35 +43,52 @@
             <h2 class="title-section text-3xl md:text-5xl">Илья Чайка</h2>
             <div class="text-slate-300 font-light text-lg md:text-xl leading-relaxed space-y-6">
                 <p>Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
-                <p>Участник чемпионатов мира по виндсерфингу. Катается на спотах, доступных только серферам высокого уровня.</p>
-                <p class="text-[var(--accent)] font-medium border-l border-slate-700 pl-6">Эксперт Forbes, «Вокруг света» и Men Today.</p>
+                <p>Участник чемпионатов мира по виндсерфингу. Эксперт Forbes, «Вокруг света» и Men Today.</p>
             </div>
         </div>
         <div class="md:col-span-5 relative">
-            <img src="images/ilya.JPG" class="w-full h-auto rounded-sm shadow-2xl grayscale-[30%]" alt="">
-            <img src="images/ilya2.JPG" class="absolute -bottom-10 -left-10 w-40 h-56 border-8 border-[var(--ocean-blue)] shadow-2xl hidden md:block rounded-sm" alt="">
+            <img src="images/ilya.jpg" class="w-full h-auto rounded-sm shadow-2xl grayscale-[20%]" alt="">
+            <img src="images/ilya2.jpg" class="absolute -bottom-10 -left-10 w-40 h-56 border-8 border-[var(--ocean-blue)] shadow-2xl hidden md:block rounded-sm" alt="">
+        </div>
+    </section>
+
+    <section class="py-32 bg-[var(--ocean-blue)]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="h-80 overflow-hidden"><img src="images/city.jpg" class="w-full h-full object-cover opacity-80" alt=""></div>
+                <div class="h-80 overflow-hidden"><img src="images/bridge.jpg" class="w-full h-full object-cover opacity-80" alt=""></div>
+            </div>
         </div>
     </section>
 
     <section class="py-32 max-w-7xl mx-auto px-6">
         <h2 class="title-section text-3xl md:text-5xl mb-20 text-center">Ритм экспедиции</h2>
         <div class="album-scroll">
-            <div class="album-card"><img src="images/surf.JPG" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
-            <div class="album-card"><img src="images/lighthouse.JPG" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
-            <div class="album-card"><img src="images/star.JPG" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
-            <div class="album-card"><img src="images/people.JPG" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
+            <div class="album-card"><img src="images/surf.jpg" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
+            <div class="album-card"><img src="images/lighthouse.jpg" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
+            <div class="album-card"><img src="images/star.jpg" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
+            <div class="album-card"><img src="images/people.jpg" class="w-full h-[500px] object-cover rounded-sm" alt=""></div>
         </div>
     </section>
 
     <section class="py-32 bg-[var(--ocean-blue)]">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
             <div class="relative h-[500px] rounded-sm overflow-hidden shadow-2xl">
-                <img src="images/primorye2.JPG" class="w-full h-full object-cover opacity-70" alt="">
+                <img src="images/nature.jpg" class="w-full h-full object-cover opacity-70" alt="">
             </div>
             <div class="space-y-10">
                 <h2 class="title-section text-3xl md:text-4xl">Проживание</h2>
-                <p class="text-slate-300 font-light text-lg md:text-xl leading-relaxed italic text-[var(--accent)]">— Будем жить в заповедной зоне у границы с Северной Кореей.</p>
                 <p class="text-slate-300 font-light text-lg md:text-xl leading-relaxed">Размещение в домах из натурального бруса с панорамным видом на море, бассейн, баня и холодная купель.</p>
+                <img src="images/primary.JPG" class="w-full h-64 object-cover rounded-sm grayscale-[20%]" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-40 max-w-5xl mx-auto px-6 text-center">
+        <div class="py-24 border-t border-slate-800 bg-[var(--ocean-blue)] rounded-sm">
+            <h3 class="text-5xl md:text-9xl font-thin mb-16 text-[var(--accent)]">от 130 000 ₽</h3>
+            <div class="flex justify-center">
+                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-foam px-20 py-7 text-[11px] tracking-[0.5em] uppercase shadow-xl">Подать заявку</a>
             </div>
         </div>
     </section>

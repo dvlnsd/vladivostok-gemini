@@ -23,6 +23,7 @@
             background-color: var(--foam);
             color: var(--ocean-dark);
             transition: all 0.3s ease;
+            font-weight: 700;
         }
         .btn-foam:hover {
             background-color: var(--accent);
@@ -32,8 +33,6 @@
         .album-scroll {
             display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 2rem;
         }
-        .album-scroll::-webkit-scrollbar { height: 2px; }
-        .album-scroll::-webkit-scrollbar-thumb { background: var(--accent); }
         .album-card { flex: 0 0 85%; scroll-snap-align: start; }
         @media (min-width: 768px) { .album-card { flex: 0 0 40%; } }
 
@@ -48,7 +47,7 @@
 
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="Снимок экрана 2026-04-28 в 2.53.13 PM.png" class="w-full h-full object-cover scale-105" alt="Nature">
+            <img src="nature.JPG" class="w-full h-full object-cover scale-105" alt="Nature">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
         
@@ -63,16 +62,12 @@
                     серфинг в тихом океане и невероятная природа дальнего востока
                 </p>
                 <div class="w-24 h-px bg-[var(--accent)] mx-auto opacity-50"></div>
-                <p class="text-[10px] md:text-xs font-medium tracking-[0.4em] text-slate-400 uppercase max-w-3xl mx-auto leading-loose">
-                    японское море / хайкинг по сопкам / рыбалка / дикая гастрономия
-                </p>
             </div>
             
             <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-foam px-12 py-5 text-[10px] tracking-[0.4em] uppercase font-bold shadow-2xl">
+                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-foam px-12 py-5 text-[10px] tracking-[0.4em] uppercase shadow-2xl">
                     Подать заявку
                 </a>
-                <p class="text-[10px] tracking-[0.6em] text-white/40 uppercase">сентябрь 2026</p>
             </div>
         </div>
     </section>
@@ -82,7 +77,7 @@
             <h2 class="title-section text-3xl md:text-5xl">Илья Чайка</h2>
             <div class="space-y-8 text-slate-300 font-light text-lg md:text-xl leading-relaxed">
                 <p>Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
-                <p>Участник чемпионатов мира по виндсерфингу и тестов олимпийского оборудования. Катается на спотах, доступных только серферам высокого уровня.</p>
+                <p>Участник чемпионатов мира по виндсерфингу. Катается на спотах, доступных только серферам высокого уровня.</p>
                 <p class="text-[var(--accent)] font-medium border-l border-slate-700 pl-6">Эксперт Forbes, «Вокруг света» и Men Today.</p>
             </div>
         </div>
@@ -111,14 +106,14 @@
         <div class="text-center mb-20">
             <h2 class="title-section text-3xl md:text-5xl mb-8">Ритм экспедиции</h2>
             <p class="text-slate-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
-                Проведем эти дни как настоящие дальневосточники — серфинг в Японском море, рыбалка, прогулки на катере и исследование побережья. Познакомимся с морскими котиками, исследуем живописные бухты на SUP, сходим на хайкинг и поужинаем легендарными приморскими гребешками.
+                Проведем эти дни как настоящие дальневосточники — серфинг в Японском море, рыбалка, прогулки на катере и исследование побережья.
             </p>
         </div>
         
         <div class="album-scroll">
-            <div class="album-card"><img src="Снимок экрана 2026-04-28 в 3.47.07 PM.png" class="w-full h-[500px] object-cover" alt="Surf"></div>
-            <div class="album-card"><img src="Снимок экрана 2026-04-28 в 4.04.09 PM.png" class="w-full h-[500px] object-cover" alt="Lighthouse"></div>
-            <div class="album-card"><img src="surf.JPG" class="w-full h-[500px] object-cover" alt="Surf 2"></div>
+            <div class="album-card"><img src="surf.JPG" class="w-full h-[500px] object-cover" alt="Surf"></div>
+            <div class="album-card"><img src="lighthouse.JPG" class="w-full h-[500px] object-cover" alt="Lighthouse"></div>
+            <div class="album-card"><img src="star.JPG" class="w-full h-[500px] object-cover" alt="Star"></div>
             <div class="album-card"><img src="people.JPG" class="w-full h-[500px] object-cover" alt="Team"></div>
         </div>
     </section>
@@ -130,10 +125,12 @@
             </div>
             <div class="space-y-10">
                 <h2 class="title-section text-3xl md:text-4xl">Проживание</h2>
-                <div class="space-y-8 text-slate-300 font-light text-lg md:text-xl leading-relaxed">
-                    <p class="italic text-[var(--accent)]">— Будем жить в заповедной зоне у границы с Северной Кореей — в месте, скрытом от посторонних глаз. </p>
-                    <p>Размещение в домах из натурального бруса с панорамным видом на море, recovery area — бассейн, баня и холодная купель.</p>
-                </div>
+                <p class="text-slate-300 font-light text-lg md:text-xl leading-relaxed italic text-[var(--accent)]">
+                    — Будем жить в заповедной зоне у границы с Северной Кореей — в месте, скрытом от посторонних глаз. 
+                </p>
+                <p class="text-slate-300 font-light text-lg md:text-xl leading-relaxed">
+                    Размещение в домах из натурального бруса с панорамным видом на море, бассейн, баня и холодная купель.
+                </p>
             </div>
         </div>
     </section>

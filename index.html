@@ -12,7 +12,8 @@
         
         /* ТИПОГРАФИКА */
         .ultra-thin { font-weight: 100; letter-spacing: 0.3em; text-transform: uppercase; }
-        .font-light-text { font-weight: 200; line-height: 1.8; color: #94a3b8; font-size: 1.05rem; }
+        /* УВЕЛИЧЕННЫЙ ШРИФТ ДЛЯ ТЕКСТОВЫХ БЛОКОВ */
+        .font-light-text { font-weight: 200; line-height: 1.8; color: #cbd5e1; font-size: 1.25rem; }
 
         /* HERO ОБНОВЛЕННЫЙ */
         .hero-fog-container {
@@ -196,22 +197,22 @@
                 <div class="p-10 bg-white/5 border border-white/10">
                     <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 01</p>
                     <h4 class="ultra-thin text-base mb-4">Город</h4>
-                    <p class="font-light-text text-sm">Встреча, прогулка по знаковым местам. Ночь в Novotel.</p>
+                    <p class="font-light-text !text-base">Встреча, прогулка по знаковым местам. Ночь в Novotel.</p>
                 </div>
                 <div class="p-10 bg-white/5 border border-white/10">
                     <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 02</p>
                     <h4 class="ultra-thin text-base mb-4">Путь на юг</h4>
-                    <p class="font-light-text text-sm">Путешествие в заповедную зону. Заезд в Эко-резорт.</p>
+                    <p class="font-light-text !text-base">Путешествие в заповедную зону. Заезд в Эко-резорт.</p>
                 </div>
                 <div class="p-10 bg-white/5 border border-white/10">
                     <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 03—07</p>
                     <h4 class="ultra-thin text-base mb-4">Океан</h4>
-                    <p class="font-light-text text-sm">Серфинг, сап-бординг, катер к котикам, рыбалка.</p>
+                    <p class="font-light-text !text-base">Серфинг, сап-бординг, катер к котикам, рыбалка.</p>
                 </div>
                 <div class="p-10 bg-white/5 border border-white/10">
                     <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 08</p>
                     <h4 class="ultra-thin text-base mb-4">Финал</h4>
-                    <p class="font-light-text text-sm">Заключительная сессия на воде и трансфер в город.</p>
+                    <p class="font-light-text !text-base">Заключительная сессия на воде и трансфер в город.</p>
                 </div>
             </div>
         </div>
@@ -231,14 +232,14 @@
 
     <section class="photo-strip">
         <img src="images/primoryeview2.jpg" onclick="show(this)">
-        <img src="images/reynekewave3.jpg" onclick="show(this)">
-        <img src="images/russkyislawave2.jpg" onclick="show(this)">
-        <img src="images/russkyislawave3.jpg" onclick="show(this)">
-        <img src="images/primoryeview3.jpg" onclick="show(this)">
-        <img src="images/reyneke1.jpg" onclick="show(this)">
-        <img src="images/primoryecligg.jpg" onclick="show(this)">
-        <img src="images/primorye2.jpg" onclick="show(this)">
-        <img src="images/russkyislawave.jpg" onclick="show(this)">
+        <img src="images/reynekewave3.jpg" onclick="showImg(this)">
+        <img src="images/russkyislawave2.jpg" onclick="showImg(this)">
+        <img src="images/russkyislawave3.jpg" onclick="showImg(this)">
+        <img src="images/primoryeview3.jpg" onclick="showImg(this)">
+        <img src="images/reyneke1.jpg" onclick="showImg(this)">
+        <img src="images/primoryecligg.jpg" onclick="showImg(this)">
+        <img src="images/primorye2.jpg" onclick="showImg(this)">
+        <img src="images/russkyislawave.jpg" onclick="showImg(this)">
     </section>
 
     <footer class="py-10 text-center opacity-10 text-[9px] tracking-[2em]">VLADIVOSTOK 2026</footer>

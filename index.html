@@ -9,78 +9,47 @@
     <style>
         :root {
             --ocean-dark: #020611;
-            --ocean-blue: #0a1224;
             --foam: #f8fafc;
             --accent: #a0e9ff;
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--ocean-dark); color: var(--foam); scroll-behavior: smooth; overflow-x: hidden;}
         
-        /* ШАХМАТКА С ГАРМОНИЗАЦИЕЙ ФОРМЫ КАРТИНОК */
-        .checker-section {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            padding: 6rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .title-premium { font-weight: 100; letter-spacing: 0.3em; text-transform: uppercase; }
+        .font-light-text { font-weight: 200; line-height: 1.8; color: #94a3b8; font-size: 1.1rem; }
+
+        /* ЖУРНАЛЬНАЯ СЕТКА (Masonry коллажи) */
+        .photo-collage { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+        .collage-main { grid-column: span 4; grid-row: span 2; }
+        .collage-sub { grid-column: span 2; }
+
+        /* ШАХМАТКА */
+        .checker-section { display: flex; flex-direction: column; gap: 4rem; padding: 8rem 1.5rem; max-width: 1300px; margin: 0 auto; }
         @media (min-width: 768px) {
             .checker-section { flex-direction: row; align-items: center; justify-content: space-between; }
             .checker-section:nth-child(even) { flex-direction: row-reverse; }
             .checker-section > div { width: 48%; }
         }
 
-        /* ЕДИНАЯ ВЫСОТА ФОТО В ЛИНЕЕЙКЕ */
-        .photo-strip {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding: 2rem 0;
-            scrollbar-width: none;
-        }
-        .photo-strip::-webkit-scrollbar { display: none; }
-        .photo-strip img {
-            height: 400px; /* Фиксированная высота */
-            width: auto;
-            object-fit: cover;
-            border-radius: 2px;
-            flex-shrink: 0;
-            opacity: 0.6;
-            transition: opacity 0.5s ease;
-        }
-        .photo-strip img:hover { opacity: 1; }
-
-        /* CSS ДЛЯ ГАРМОНИЗАЦИИ КАРТИНОК (16:9) */
-        .checker-section img {
-            width: 100%;
-            object-fit: cover;
-            border-radius: 2px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transition: transform 0.6s ease;
-        }
-        .checker-section .img-container:hover img { transform: scale(1.03); }
-
-        .title-premium { font-weight: 100; letter-spacing: 0.3em; text-transform: uppercase; font-size: clamp(1.2rem, 3vw, 2.5rem); }
-        .font-light-text { font-weight: 200; line-height: 1.8; color: #94a3b8; font-size: 1.1rem; }
-
+        /* КНОПКА И ЦЕНА */
         .btn-cta {
             background-color: var(--foam);
             color: var(--ocean-dark);
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             letter-spacing: 0.5em;
-            padding: 1.5rem 5rem;
+            padding: 1.5rem 6rem;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            border-radius: 2px;
+            font-size: 0.7rem;
+            border-radius: 1px;
         }
-        .btn-cta:hover { background-color: var(--accent); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(160,233,255,0.2); }
+        .btn-cta:hover { background-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 50px rgba(160,233,255,0.3); }
 
-        .program-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 2px;
-        }
+        .price-tag { font-weight: 100; letter-spacing: 0.8em; font-size: clamp(1.5rem, 5vw, 4rem); white-space: nowrap; }
+
+        /* ЛЕНТА ВНИЗУ */
+        .infinite-scroll { display: flex; gap: 1rem; overflow-x: auto; padding: 4rem 0; scrollbar-width: none; }
+        .infinite-scroll::-webkit-scrollbar { display: none; }
+        .infinite-scroll img { height: 350px; width: auto; object-fit: cover; opacity: 0.7; transition: 0.5s; }
+        .infinite-scroll img:hover { opacity: 1; }
     </style>
 </head>
 <body class="antialiased">
@@ -92,130 +61,131 @@
         </div>
         <div class="relative z-10 text-center px-4">
             <h1 class="title-premium text-4xl md:text-7xl mb-8">Владивосток <br> <span class="text-[var(--accent)]">с Ильей Чайкой</span></h1>
-            <p class="font-light tracking-[0.5em] opacity-60 uppercase text-xs md:text-sm">серфинг в тихом океане и дикая природа</p>
+            <p class="font-light tracking-[0.6em] opacity-50 uppercase text-[10px] md:text-xs">серфинг в тихом океане и дикая природа</p>
         </div>
     </section>
 
-    <main>
-        
-        <section class="checker-section">
-            <div class="img-container aspect-video">
-                <img src="images/mainilya1.jpg" alt="Илья Чайка">
+    <section class="checker-section">
+        <div class="photo-collage">
+            <div class="collage-main"><img src="images/mainilya1.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/ilya.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" alt=""></div>
+            <div class="collage-sub"><img src="images/ilya2.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" alt=""></div>
+        </div>
+        <div class="space-y-8">
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Илья Чайка</h2>
+            <div class="font-light-text space-y-4">
+                <p>Биг-вейв серфер и Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
+                <p>Участник чемпионатов мира и тестов олимпийского оборудования. Обучает профессионально уже 15 лет — поэтому его студенты прогрессируют быстрее.</p>
+                <p class="text-white opacity-60 italic">Эксперт Forbes, «Вокруг света» и Men Today.</p>
             </div>
-            <div class="space-y-8">
-                <h2 class="title-premium text-[var(--accent)]">Илья Чайка</h2>
-                <div class="font-light-text space-y-4">
-                    <p>Биг-вейв серфер и Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
-                    <p>Участник чемпионатов мира и тестов олимпийского оборудования. Обучает профессионально уже 15 лет — поэтому его студенты прогрессируют быстрее.</p>
-                    <p class="text-white opacity-80">Эксперт Forbes, «Вокруг света» и Men Today.</p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="checker-section">
-            <div class="img-container aspect-video">
-                <img src="images/city1.jpg" alt="Владивосток">
-            </div>
-            <div class="space-y-8">
-                <h2 class="title-premium text-[var(--accent)]">Владивосток</h2>
-                <p class="font-light-text">
-                    Столица Дальнего Востока, некогда закрытый порт, даже сейчас этот город сохраняет самобытность и он не похож ни на какие другие российские города. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.
-                </p>
-            </div>
-        </section>
+    <section class="checker-section">
+        <div class="photo-collage">
+            <div class="collage-main"><img src="images/city1.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/vlcity.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/lighthouse.jpg" class="w-full h-full object-cover" alt=""></div>
+        </div>
+        <div class="space-y-8">
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Владивосток</h2>
+            <p class="font-light-text">
+                Столица Дальнего Востока, некогда закрытый порт, даже сейчас этот город сохраняет самобытность и он не похож ни на какие другие российские города. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.
+            </p>
+        </div>
+    </section>
 
-        <section class="checker-section">
-            <div class="img-container aspect-video">
-                <img src="images/vlwaves.jpg" alt="Сентябрь">
-            </div>
-            <div class="space-y-8">
-                <h2 class="title-premium text-[var(--accent)]">Четвертый месяц лета</h2>
-                <p class="font-light-text">
-                    Сентябрь — самое лучшее время во Владивостоке, но знают об этом только местные жители. Туристы разъезжаются по домам, а мы наслаждаемся любимым сезоном — купаемся, загораем и ловим волны, которые дает нам Японское море.
-                </p>
-            </div>
-        </section>
+    <section class="checker-section">
+        <div class="img-container">
+            <img src="images/vlwaves.jpg" class="w-full" alt="">
+        </div>
+        <div class="space-y-8">
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Четвертый месяц лета</h2>
+            <p class="font-light-text">
+                Сентябрь — самое лучшее время во Владивостоке, но знают об этом только местные жители. Туристы разъезжаются по домам, а мы наслаждаемся любимым сезоном — купаемся, загораем и ловим волны, которые дает нам Японское море.
+            </p>
+        </div>
+    </section>
 
-        <section class="checker-section">
-            <div class="img-container aspect-video">
-                <img src="images/star.jpg" alt="Активности">
+    <section class="checker-section">
+        <div class="photo-collage">
+            <div class="collage-main"><img src="images/star.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/renekewave2.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/russkyislawave.jpg" class="w-full h-full object-cover" alt=""></div>
+        </div>
+        <div class="space-y-8">
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Дальневосточные активности</h2>
+            <div class="font-light-text">
+                <p class="mb-6">Рыбалка на красную рыбу, изучение окрестностей на катере там, где на машине не проехать, знакомство с морскими котиками, серфинг и прогулки на SUP в живописные бухты.</p>
+                <p>Закаты невероятной красоты и полное единение с природой Приморского края. А если повезет, то попробуете легендарный гребешок, о котором рассказывал Мумий Тролль в сказке "Владивосток 3000" 😉</p>
             </div>
-            <div class="space-y-8">
-                <h2 class="title-premium text-[var(--accent)]">Дальневосточные активности</h2>
-                <div class="font-light-text space-y-4">
-                    <p>Рыбалка на красную рыбу, изучение окрестностей на катере там, где на машине не проехать, знакомство с морскими котиками, серфинг и прогулки на SUP в живописные бухты.</p>
-                    <p>Закаты невероятной красоты и полное единение с природой Приморского края. А если повезет, то попробуете легендарный гребешок, о котором рассказывал Мумий Тролль в сказке "Владивосток 3000" 😉</p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="checker-section">
-            <div class="img-container aspect-video">
-                <img src="images/ecoresort.jpg" alt="Эко-резорт">
+    <section class="checker-section">
+        <div class="photo-collage">
+            <div class="collage-main"><img src="images/ecoresort.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/ecoresort1.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-sub"><img src="images/ecoresort2.jpg" class="w-full h-full object-cover" alt=""></div>
+        </div>
+        <div class="space-y-8">
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Проживание</h2>
+            <div class="font-light-text space-y-6">
+                <p class="italic text-white opacity-90">— Будем жить в заповедной зоне на границе с Северной Кореей — в месте, скрытом от посторонних глаз.</p>
+                <p>Размещение в домах из натурального бруса с панорамным видом на море, recovery area — бассейн, баня и холодная купель.</p>
             </div>
-            <div class="space-y-8">
-                <h2 class="title-premium text-[var(--accent)]">Проживание</h2>
-                <div class="font-light-text space-y-6">
-                    <p class="italic text-white opacity-90">— Будем жить в заповедной зоне на границе с Северной Кореей — в месте, скрытом от посторонних глаз.</p>
-                    <p>Размещение в домах из натурального бруса с панорамным видом на море, recovery area — бассейн, баня и холодная купель.</p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <section class="py-32 bg-[var(--ocean-blue)]">
+    <section class="py-32 border-y border-white/5">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="title-premium text-3xl mb-20 text-center tracking-[0.4em]">Программа</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="program-card">
-                    <span class="font-thin text-xs text-[var(--accent)] block mb-4 opacity-50 uppercase">День 01</span>
-                    <h4 class="title-premium text-lg mb-6">Город</h4>
+            <h2 class="title-premium text-3xl mb-24 text-center">Программа</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/10">
+                <div class="p-12 hover:bg-white/[0.02] transition">
+                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 01</p>
+                    <h4 class="title-premium text-base mb-4">Город</h4>
                     <p class="font-light-text text-sm">Встреча, прогулка по знаковым местам. Ночь в Novotel.</p>
                 </div>
-                <div class="program-card">
-                    <span class="font-thin text-xs text-[var(--accent)] block mb-4 opacity-50 uppercase">День 02</span>
-                    <h4 class="title-premium text-lg mb-6">Путь на юг</h4>
-                    <p class="font-light-text text-sm">Путешествие к побережью. Заезд в заповедный Эко-резорт в уединенной бухте.</p>
+                <div class="p-12 hover:bg-white/[0.02] transition">
+                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 02</p>
+                    <h4 class="title-premium text-base mb-4">Путь на юг</h4>
+                    <p class="font-light-text text-sm">Путешествие в заповедную зону на юге Приморья. Заезд в Эко-резорт.</p>
                 </div>
-                <div class="program-card">
-                    <span class="font-thin text-xs text-[var(--accent)] block mb-4 opacity-50 uppercase">День 03—07</span>
-                    <h4 class="title-premium text-lg mb-6">Океан</h4>
+                <div class="p-12 hover:bg-white/[0.02] transition">
+                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 03—07</p>
+                    <h4 class="title-premium text-base mb-4">Океан</h4>
                     <p class="font-light-text text-sm">Серфинг, сап-бординг, катер к котикам, рыбалка и дикая кухня.</p>
                 </div>
-                <div class="program-card">
-                    <span class="font-thin text-xs text-[var(--accent)] block mb-4 opacity-50 uppercase">День 08</span>
-                    <h4 class="title-premium text-lg mb-6">Финал</h4>
+                <div class="p-12 hover:bg-white/[0.02] transition">
+                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 08</p>
+                    <h4 class="title-premium text-base mb-4">Финал</h4>
                     <p class="font-light-text text-sm">Заключительная сессия на воде и трансфер обратно в город.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-10 bg-black">
-        <div class="photo-strip">
-            <img src="images/primoryeview2.jpg" alt="">
-            <img src="images/reyneke1.jpg" alt="">
-            <img src="images/russkyislawave.jpg" alt="">
-            <img src="images/vlwaves.jpg" alt="">
-            <img src="images/city.jpg" alt="">
-            <img src="images/primary.jpg" alt="">
-        </div>
+    <section class="infinite-scroll">
+        <img src="images/primoryeview2.jpg" alt="">
+        <img src="images/renekewave3.jpg" alt="">
+        <img src="images/russkyislawave2.jpg" alt="">
+        <img src="images/russkyislawave3.jpg" alt="">
+        <img src="images/primoryeview3.jpg" alt="">
+        <img src="images/renekewave2.jpg" alt="">
+        <img src="images/primary.jpg" alt="">
     </section>
 
-    <section class="py-40 text-center px-6 border-t border-white/5">
-        <div class="max-w-5xl mx-auto space-y-16">
-            <h2 class="title-premium text-4xl md:text-7xl tracking-[0.5em] whitespace-nowrap">Стоимость: 130 000 ₽</h2>
-            <div class="pt-8">
-                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-cta inline-block">Подать заявку</a>
+    <section class="py-40 text-center">
+        <div class="max-w-4xl mx-auto space-y-20">
+            <h3 class="price-tag">СТОИМОСТЬ: 130 000 ₽</h3>
+            <div>
+                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-cta">Подать заявку</a>
             </div>
-            <p class="font-thin text-slate-500 text-[10px] uppercase tracking-[1em]">Сентябрь 2026</p>
+            <p class="font-thin text-slate-600 text-[10px] tracking-[1.5em] uppercase">Сентябрь 2026</p>
         </div>
     </section>
 
-    <footer class="py-10 text-center opacity-10 text-[9px] tracking-[2em] uppercase">
-        Vladivostok — 2026
-    </footer>
+    <footer class="py-10 text-center opacity-10 text-[8px] tracking-[2em]">VLADIVOSTOK 2026</footer>
 
 </body>
 </html>

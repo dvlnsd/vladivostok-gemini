@@ -18,7 +18,6 @@
         .collage-main { grid-column: span 4; grid-row: span 2; cursor: zoom-in; overflow: hidden; }
         .collage-sub { grid-column: span 2; cursor: zoom-in; overflow: hidden; }
         .photo-collage img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-        .photo-collage img:hover { transform: scale(1.05); }
 
         /* ШАХМАТКА */
         .checker-section { display: flex; flex-direction: column; gap: 4rem; padding: 8rem 1.5rem; max-width: 1300px; margin: 0 auto; }
@@ -36,23 +35,28 @@
         #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
         /* ЛЕНТА ФОТО */
-        .strip-container { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
+        .strip-container { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; background: #000; }
         .strip-container img { height: 450px; width: auto; object-fit: cover; cursor: zoom-in; flex-shrink: 0; }
 
-        /* КНОПКА КУПИТЬ */
-        .btn-cta {
-            background-color: var(--foam);
-            color: var(--ocean-dark);
+        /* КНОПКА С ПОДСВЕТКОЙ */
+        .btn-premium {
+            border: 1px solid rgba(160, 233, 255, 0.3);
+            background: transparent;
+            color: var(--foam);
             transition: all 0.5s ease;
-            letter-spacing: 0.5em;
-            padding: 1.8rem 5rem;
+            letter-spacing: 0.4em;
+            padding: 1.5rem 4rem;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            display: inline-block;
-            width: auto;
-            min-width: 300px;
+            font-size: 0.75rem;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-cta:hover { background-color: var(--accent); transform: scale(1.02); }
+        .btn-premium:hover {
+            color: var(--ocean-dark);
+            background-color: var(--accent);
+            box-shadow: 0 0 30px rgba(160, 233, 255, 0.6);
+            border-color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -62,7 +66,7 @@
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="images/nature.jpg" class="w-full h-full object-cover" alt="">
-            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="absolute inset-0 bg-black/40"></div>
         </div>
         <div class="relative z-10 text-center px-4">
             <h1 class="title-premium text-4xl md:text-7xl mb-8">Владивосток <br> <span class="text-[var(--accent)]">с Ильей Чайкой</span></h1>
@@ -94,50 +98,7 @@
         </div>
         <div class="space-y-8">
             <h2 class="title-premium text-[var(--accent)] text-2xl">Владивосток</h2>
-            <p class="font-light-text">
-                Столица Дальнего Востока, некогда закрытый порт, этот город сохраняет самобытность. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.
-            </p>
-        </div>
-    </section>
-
-    <section class="checker-section">
-        <div class="collage-main" style="grid-column: span 6;" onclick="showImg(this)">
-            <img src="images/vlwaves.jpg" class="w-full rounded-sm">
-        </div>
-        <div class="space-y-8">
-            <h2 class="title-premium text-[var(--accent)] text-2xl">Четвертый месяц лета</h2>
-            <p class="font-light-text">
-                Сентябрь — лучшее время во Владивостоке. Туристы разъезжаются по домам, а мы наслаждаемся любимым сезоном — купаемся, загораем и ловим волны Японского моря.
-            </p>
-        </div>
-    </section>
-
-    <section class="checker-section">
-        <div class="photo-collage">
-            <div class="collage-main" onclick="showImg(this)"><img src="images/star.jpg"></div>
-            <div class="collage-sub" onclick="showImg(this)"><img src="images/bridge.jpg"></div>
-            <div class="collage-sub" onclick="showImg(this)"><img src="images/russkyislawave.jpg"></div>
-        </div>
-        <div class="space-y-8">
-            <h2 class="title-premium text-[var(--accent)] text-2xl">Активности</h2>
-            <p class="font-light-text">
-                Рыбалка на красную рыбу, изучение окрестностей на катере, знакомство с морскими котиками и серфинг. А если повезет, попробуете легендарный гребешок, о котором рассказывал Мумий Тролль 😉
-            </p>
-        </div>
-    </section>
-
-    <section class="checker-section">
-        <div class="photo-collage">
-            <div class="collage-main" onclick="showImg(this)"><img src="images/ecoresort.jpg"></div>
-            <div class="collage-sub" onclick="showImg(this)"><img src="images/ecoresort1.jpg"></div>
-            <div class="collage-sub" onclick="showImg(this)"><img src="images/ecoresort2.jpg"></div>
-        </div>
-        <div class="space-y-8">
-            <h2 class="title-premium text-[var(--accent)] text-2xl">Проживание</h2>
-            <div class="font-light-text space-y-4">
-                <p class="italic text-white opacity-90">— Будем жить в заповедной зоне на границе с Северной Кореей.</p>
-                <p>Размещение в домах из натурального бруса с видом на море, бассейн, баня и холодная купель.</p>
-            </div>
+            <p class="font-light-text">Столица Дальнего Востока, некогда закрытый порт, этот город сохраняет самобытность. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.</p>
         </div>
     </section>
 
@@ -169,12 +130,17 @@
         </div>
     </section>
 
-    <section class="py-32 text-center">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <h3 class="title-premium text-3xl md:text-5xl tracking-[0.5em] block">СТОИМОСТЬ: 130 000 ₽</h3>
+    <section class="py-32 text-center bg-[#050a14]">
+        <div class="max-w-6xl mx-auto px-6">
+            <h3 class="title-premium text-3xl md:text-5xl tracking-[0.5em] mb-16 whitespace-nowrap overflow-hidden text-ellipsis">
+                СТОИМОСТЬ: 130 000 ₽
+            </h3>
             <div class="pt-4">
-                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-cta">Подать заявку</a>
+                <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-premium">
+                    Подать заявку
+                </a>
             </div>
+            <p class="mt-12 opacity-30 text-[9px] tracking-[1em] uppercase">Сентябрь 2026</p>
         </div>
     </section>
 
@@ -185,7 +151,7 @@
         <img src="images/russkyislawave3.jpg" onclick="showImg(this)">
         <img src="images/primoryeview3.jpg" onclick="showImg(this)">
         <img src="images/reyneke1.jpg" onclick="showImg(this)">
-        <img src="images/primorye2.JPG" onclick="showImg(this)">
+        <img src="images/primary.jpg" onclick="showImg(this)">
         <img src="images/primoryecligg.jpg" onclick="showImg(this)">
     </section>
 

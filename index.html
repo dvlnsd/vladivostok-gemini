@@ -7,20 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --ocean-dark: #020611;
-            --foam: #f8fafc;
-            --accent: #a0e9ff;
-        }
-        body { font-family: 'Inter', sans-serif; background-color: var(--ocean-dark); color: var(--foam); scroll-behavior: smooth; overflow-x: hidden;}
+        :root { --ocean-dark: #020611; --foam: #f8fafc; --accent: #a0e9ff; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--ocean-dark); color: var(--foam); scroll-behavior: smooth; overflow-x: hidden; }
         
         .title-premium { font-weight: 100; letter-spacing: 0.3em; text-transform: uppercase; }
         .font-light-text { font-weight: 200; line-height: 1.8; color: #94a3b8; font-size: 1.1rem; }
 
-        /* ЖУРНАЛЬНАЯ СЕТКА (Masonry коллажи) */
+        /* КОЛЛАЖИ */
         .photo-collage { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-        .collage-main { grid-column: span 4; grid-row: span 2; }
-        .collage-sub { grid-column: span 2; }
+        .collage-main { grid-column: span 4; grid-row: span 2; cursor: zoom-in; overflow: hidden; }
+        .collage-sub { grid-column: span 2; cursor: zoom-in; overflow: hidden; }
+        .photo-collage img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+        .photo-collage img:hover { transform: scale(1.05); }
 
         /* ШАХМАТКА */
         .checker-section { display: flex; flex-direction: column; gap: 4rem; padding: 8rem 1.5rem; max-width: 1300px; margin: 0 auto; }
@@ -30,52 +28,59 @@
             .checker-section > div { width: 48%; }
         }
 
-        /* КНОПКА И ЦЕНА */
+        /* LIGHTBOX */
+        #lightbox {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 6, 17, 0.98); cursor: zoom-out; justify-content: center; align-items: center;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+        /* ЛЕНТА ФОТО */
+        .strip-container { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
+        .strip-container img { height: 450px; width: auto; object-fit: cover; cursor: zoom-in; flex-shrink: 0; }
+
+        /* КНОПКА КУПИТЬ */
         .btn-cta {
             background-color: var(--foam);
             color: var(--ocean-dark);
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 0.5s ease;
             letter-spacing: 0.5em;
-            padding: 1.5rem 6rem;
+            padding: 1.8rem 5rem;
             text-transform: uppercase;
-            font-size: 0.7rem;
-            border-radius: 1px;
+            font-size: 0.8rem;
+            display: inline-block;
+            width: auto;
+            min-width: 300px;
         }
-        .btn-cta:hover { background-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 50px rgba(160,233,255,0.3); }
-
-        .price-tag { font-weight: 100; letter-spacing: 0.8em; font-size: clamp(1.5rem, 5vw, 4rem); white-space: nowrap; }
-
-        /* ЛЕНТА ВНИЗУ */
-        .infinite-scroll { display: flex; gap: 1rem; overflow-x: auto; padding: 4rem 0; scrollbar-width: none; }
-        .infinite-scroll::-webkit-scrollbar { display: none; }
-        .infinite-scroll img { height: 350px; width: auto; object-fit: cover; opacity: 0.7; transition: 0.5s; }
-        .infinite-scroll img:hover { opacity: 1; }
+        .btn-cta:hover { background-color: var(--accent); transform: scale(1.02); }
     </style>
 </head>
-<body class="antialiased">
+<body>
+
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lb-img" src=""></div>
 
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="images/nature.jpg" class="w-full h-full object-cover" alt="">
-            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
         </div>
         <div class="relative z-10 text-center px-4">
             <h1 class="title-premium text-4xl md:text-7xl mb-8">Владивосток <br> <span class="text-[var(--accent)]">с Ильей Чайкой</span></h1>
-            <p class="font-light tracking-[0.6em] opacity-50 uppercase text-[10px] md:text-xs">серфинг в тихом океане и дикая природа</p>
+            <p class="font-light tracking-[0.6em] opacity-50 uppercase text-[10px]">серфинг в тихом океане и дикая природа</p>
         </div>
     </section>
 
     <section class="checker-section">
         <div class="photo-collage">
-            <div class="collage-main"><img src="images/mainilya1.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/ilya.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" alt=""></div>
-            <div class="collage-sub"><img src="images/ilya2.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" alt=""></div>
+            <div class="collage-main" onclick="showImg(this)"><img src="images/mainilya1.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/ilya.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/ilya2.jpg"></div>
         </div>
         <div class="space-y-8">
             <h2 class="title-premium text-[var(--accent)] text-2xl">Илья Чайка</h2>
             <div class="font-light-text space-y-4">
                 <p>Биг-вейв серфер и Waterman с более чем 20-летним опытом. Родился и вырос во Владивостоке, где и научился кататься.</p>
-                <p>Участник чемпионатов мира и тестов олимпийского оборудования. Обучает профессионально уже 15 лет — поэтому его студенты прогрессируют быстрее.</p>
+                <p>Участник чемпионатов мира. Обучает профессионально уже 15 лет — поэтому его студенты прогрессируют быстрее.</p>
                 <p class="text-white opacity-60 italic">Эксперт Forbes, «Вокруг света» и Men Today.</p>
             </div>
         </div>
@@ -83,109 +88,115 @@
 
     <section class="checker-section">
         <div class="photo-collage">
-            <div class="collage-main"><img src="images/city1.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/vlcity.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/lighthouse.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-main" onclick="showImg(this)"><img src="images/city1.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/lighthouse.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/reynekewave2.jpg"></div>
         </div>
         <div class="space-y-8">
             <h2 class="title-premium text-[var(--accent)] text-2xl">Владивосток</h2>
             <p class="font-light-text">
-                Столица Дальнего Востока, некогда закрытый порт, даже сейчас этот город сохраняет самобытность и он не похож ни на какие другие российские города. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.
+                Столица Дальнего Востока, некогда закрытый порт, этот город сохраняет самобытность. Вы узнаете Владивосток так, как его знают местные жители, и прочувствуете его свободолюбивый морской нрав.
             </p>
         </div>
     </section>
 
     <section class="checker-section">
-        <div class="img-container">
-            <img src="images/vlwaves.jpg" class="w-full" alt="">
+        <div class="collage-main" style="grid-column: span 6;" onclick="showImg(this)">
+            <img src="images/vlwaves.jpg" class="w-full rounded-sm">
         </div>
         <div class="space-y-8">
             <h2 class="title-premium text-[var(--accent)] text-2xl">Четвертый месяц лета</h2>
             <p class="font-light-text">
-                Сентябрь — самое лучшее время во Владивостоке, но знают об этом только местные жители. Туристы разъезжаются по домам, а мы наслаждаемся любимым сезоном — купаемся, загораем и ловим волны, которые дает нам Японское море.
+                Сентябрь — лучшее время во Владивостоке. Туристы разъезжаются по домам, а мы наслаждаемся любимым сезоном — купаемся, загораем и ловим волны Японского моря.
             </p>
         </div>
     </section>
 
     <section class="checker-section">
         <div class="photo-collage">
-            <div class="collage-main"><img src="images/star.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/renekewave2.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/russkyislawave.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-main" onclick="showImg(this)"><img src="images/star.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/bridge.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/russkyislawave.jpg"></div>
         </div>
         <div class="space-y-8">
-            <h2 class="title-premium text-[var(--accent)] text-2xl">Дальневосточные активности</h2>
-            <div class="font-light-text">
-                <p class="mb-6">Рыбалка на красную рыбу, изучение окрестностей на катере там, где на машине не проехать, знакомство с морскими котиками, серфинг и прогулки на SUP в живописные бухты.</p>
-                <p>Закаты невероятной красоты и полное единение с природой Приморского края. А если повезет, то попробуете легендарный гребешок, о котором рассказывал Мумий Тролль в сказке "Владивосток 3000" 😉</p>
-            </div>
+            <h2 class="title-premium text-[var(--accent)] text-2xl">Активности</h2>
+            <p class="font-light-text">
+                Рыбалка на красную рыбу, изучение окрестностей на катере, знакомство с морскими котиками и серфинг. А если повезет, попробуете легендарный гребешок, о котором рассказывал Мумий Тролль 😉
+            </p>
         </div>
     </section>
 
     <section class="checker-section">
         <div class="photo-collage">
-            <div class="collage-main"><img src="images/ecoresort.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/ecoresort1.jpg" class="w-full h-full object-cover" alt=""></div>
-            <div class="collage-sub"><img src="images/ecoresort2.jpg" class="w-full h-full object-cover" alt=""></div>
+            <div class="collage-main" onclick="showImg(this)"><img src="images/ecoresort.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/ecoresort1.jpg"></div>
+            <div class="collage-sub" onclick="showImg(this)"><img src="images/ecoresort2.jpg"></div>
         </div>
         <div class="space-y-8">
             <h2 class="title-premium text-[var(--accent)] text-2xl">Проживание</h2>
-            <div class="font-light-text space-y-6">
-                <p class="italic text-white opacity-90">— Будем жить в заповедной зоне на границе с Северной Кореей — в месте, скрытом от посторонних глаз.</p>
-                <p>Размещение в домах из натурального бруса с панорамным видом на море, recovery area — бассейн, баня и холодная купель.</p>
+            <div class="font-light-text space-y-4">
+                <p class="italic text-white opacity-90">— Будем жить в заповедной зоне на границе с Северной Кореей.</p>
+                <p>Размещение в домах из натурального бруса с видом на море, бассейн, баня и холодная купель.</p>
             </div>
         </div>
     </section>
 
-    <section class="py-32 border-y border-white/5">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="title-premium text-3xl mb-24 text-center">Программа</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/10">
-                <div class="p-12 hover:bg-white/[0.02] transition">
-                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 01</p>
+    <section class="py-32 border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="title-premium text-center text-3xl mb-20">Программа</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-10 bg-white/5 border border-white/10">
+                    <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 01</p>
                     <h4 class="title-premium text-base mb-4">Город</h4>
                     <p class="font-light-text text-sm">Встреча, прогулка по знаковым местам. Ночь в Novotel.</p>
                 </div>
-                <div class="p-12 hover:bg-white/[0.02] transition">
-                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 02</p>
+                <div class="p-10 bg-white/5 border border-white/10">
+                    <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 02</p>
                     <h4 class="title-premium text-base mb-4">Путь на юг</h4>
                     <p class="font-light-text text-sm">Путешествие в заповедную зону на юге Приморья. Заезд в Эко-резорт.</p>
                 </div>
-                <div class="p-12 hover:bg-white/[0.02] transition">
-                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 03—07</p>
+                <div class="p-10 bg-white/5 border border-white/10">
+                    <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 03—07</p>
                     <h4 class="title-premium text-base mb-4">Океан</h4>
                     <p class="font-light-text text-sm">Серфинг, сап-бординг, катер к котикам, рыбалка и дикая кухня.</p>
                 </div>
-                <div class="p-12 hover:bg-white/[0.02] transition">
-                    <p class="font-thin text-[10px] text-[var(--accent)] mb-4 tracking-[0.4em]">ДЕНЬ 08</p>
+                <div class="p-10 bg-white/5 border border-white/10">
+                    <p class="text-[var(--accent)] text-[10px] mb-2 tracking-widest">ДЕНЬ 08</p>
                     <h4 class="title-premium text-base mb-4">Финал</h4>
-                    <p class="font-light-text text-sm">Заключительная сессия на воде и трансфер обратно в город.</p>
+                    <p class="font-light-text text-sm">Заключительная сессия на воде и трансфер в город.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="infinite-scroll">
-        <img src="images/primoryeview2.jpg" alt="">
-        <img src="images/renekewave3.jpg" alt="">
-        <img src="images/russkyislawave2.jpg" alt="">
-        <img src="images/russkyislawave3.jpg" alt="">
-        <img src="images/primoryeview3.jpg" alt="">
-        <img src="images/renekewave2.jpg" alt="">
-        <img src="images/primary.jpg" alt="">
-    </section>
-
-    <section class="py-40 text-center">
-        <div class="max-w-4xl mx-auto space-y-20">
-            <h3 class="price-tag">СТОИМОСТЬ: 130 000 ₽</h3>
-            <div>
+    <section class="py-32 text-center">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <h3 class="title-premium text-3xl md:text-5xl tracking-[0.5em] block">СТОИМОСТЬ: 130 000 ₽</h3>
+            <div class="pt-4">
                 <a href="https://t.me/Chaika_Ilya" target="_blank" class="btn-cta">Подать заявку</a>
             </div>
-            <p class="font-thin text-slate-600 text-[10px] tracking-[1.5em] uppercase">Сентябрь 2026</p>
         </div>
     </section>
 
-    <footer class="py-10 text-center opacity-10 text-[8px] tracking-[2em]">VLADIVOSTOK 2026</footer>
+    <section class="strip-container">
+        <img src="images/primoryeview2.jpg" onclick="showImg(this)">
+        <img src="images/renekewave3.jpg" onclick="showImg(this)">
+        <img src="images/russkyislawave2.jpg" onclick="showImg(this)">
+        <img src="images/russkyislawave3.jpg" onclick="showImg(this)">
+        <img src="images/primoryeview3.jpg" onclick="showImg(this)">
+        <img src="images/reyneke1.jpg" onclick="showImg(this)">
+        <img src="images/primorye2.JPG" onclick="showImg(this)">
+        <img src="images/primoryecligg.jpg" onclick="showImg(this)">
+    </section>
 
+    <footer class="py-10 text-center opacity-10 text-[9px] tracking-[2em]">VLADIVOSTOK 2026</footer>
+
+    <script>
+        function showImg(el) {
+            const img = el.querySelector('img') || el;
+            document.getElementById('lb-img').src = img.src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
